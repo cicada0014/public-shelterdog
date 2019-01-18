@@ -1,0 +1,57 @@
+<div class="head-additional">
+    <div class="info-wrapper">
+        <div style="margin-right:12px;">
+            <span>
+                <img style="width:13px;height:13px;" src="../../../../assets/imgs/coke-bottle.png" alt="">
+            </span>
+            <span *ngIf="item.GraphObject">
+                {{item.GraphObject.GraphEdges? item.GraphObject.GraphEdges.length : 0}}
+            </span>
+            <span *ngIf="!item.GraphObject">
+                0
+            </span>
+        </div>
+        <span>
+            <i class="far fa-eye" style="margin-right:5px"></i>{{item.hit}}
+        </span>
+    </div>
+</div>
+
+<div class="vending-machine-item-tag-wrapper">
+
+    <div class="vending-machine-item" (click)="goToItem(item)">
+        <img class="item-thumbnail" [src]="item.thumbnail" [alt]="item.title">
+
+        <div class="vending-machine-item-title">
+            [{{item.title}}]
+        </div>
+        <div class="vending-machine-item-tag-wrapper">
+            <span class="vending-machine-item-tag" *ngFor="let itemTag of item.VendingMachineItemHashTags">
+                <div *ngIf="itemTag.representation">
+                    #{{itemTag.HashTag.name}}
+                </div>
+            </span>
+        </div>
+
+
+        <div class="additional-wrapper">
+            <div class="cider-power-stat">
+                <span class="additional-label">
+                    사이다 :
+                </span>
+                <i *ngFor="let item of filledStars " class="fas fa-star"></i>
+                <i *ngFor="let item of emptyStars " class="far fa-star"></i>
+            </div>
+            <div>
+                <span class="additional-label">
+                    분량 :
+                </span>
+                {{item?.VendingMachineItemPages?.length}}P
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>

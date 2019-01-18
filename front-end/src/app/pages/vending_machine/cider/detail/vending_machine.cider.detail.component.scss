@@ -1,0 +1,414 @@
+
+@import '../../../../../global-theme.scss';
+
+
+:host{
+    #commentForm{
+        display: none ;
+    }
+    // .ngucarouselPoint{
+    //     display: none;
+    // }
+}
+
+
+.recommendation-list{
+    padding: 0px 3px;
+    display: inline-flex;
+    width : 100%; 
+    align-items: center;
+    app-vending-machine-item{
+        flex: 1;
+    }
+}
+
+
+.component-wrapper{
+    // padding: 20px;
+}
+
+.vending-machine-item-title{
+    // padding: 20px;
+    color:  rgb(47, 143, 10);
+    font-size: 22px;    
+    margin-bottom: 5px;
+    
+}
+
+.tag-line{
+    border-color :  rgb(72, 219, 14);
+    border-width: 1.5px;
+    margin-bottom: 25px;
+}
+
+
+.header-util-wrapper{
+    width: 100%;
+    display: inline-flex;
+    .item-hash-tag-list{
+        display: inline-flex;
+        width: 100%;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+        .hashtag-item{
+            padding: 5px;
+            font-size: 17px;
+            color: #bbb;
+        }
+    }
+
+    .item-hit-count{
+        display: inline-flex;
+        align-items: center;
+            padding: 5px;
+            font-size: 17px;
+            color: #bbb;
+    }
+}
+
+
+
+
+.carosel-wrapper{
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+
+}
+
+.pointer-wrapper{
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    margin-top:15px;
+    .current-index-pointer{
+        max-width: 550px;
+
+        &.mobile{
+            position: relative;
+            top: -60px;
+        }
+
+        .empty-btn{
+            width: 85px;
+        }
+        .expanstion-btn{
+    
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 85px;
+            height: 35px;
+            text-align: center;
+            cursor: pointer;
+            color : $global-theme-color;
+            font-size: 13px;
+            padding: 3px;
+            &:hover{
+                opacity: 0.8;
+            }
+            border-radius: 15px;
+            border: 1px solid $global-theme-color;
+        }
+        font-size:22px;
+        display: inline-flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+
+
+
+.image-row-wrapper{
+    display: inline-flex ; 
+    width: 100%;
+    justify-content: center;
+    .image-row{
+        width:550px;
+        img{
+            max-width: 100%;
+        }
+    }
+}
+
+
+
+.leftRs {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, .3);
+    border-radius: 999px;
+    left: 0;
+    &.mobile{
+        z-index: 300;
+        top: unset !important;
+        left :unset !important;
+        right: 60px;
+        bottom:5px;
+    }
+}
+
+
+
+
+.rightRs {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, .3);
+    border-radius: 999px;
+    right: 0;
+    &.mobile{
+        z-index: 300;
+        bottom:5px;
+        top: unset !important
+    }
+}
+
+.ngucarouselPoint {
+    list-style-type: none;
+    text-align: center;
+    padding: 12px;
+    margin: 15px 0px;
+    white-space: nowrap;
+    overflow: auto;
+    position: relative;
+    width: 100%;
+    bottom: 20px;
+    left: 0;
+    box-sizing: border-box;
+  }
+  .ngucarouselPoint li {
+    display: inline-block;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    margin: 0 3px;
+    transition: .4s ease all;
+  }
+  .ngucarouselPoint li.active {
+      background: black;
+      width: 10px;
+  }
+
+
+  .util-btns-wrapper{
+      
+      margin-top:15px;
+      display: inline-flex;
+      width: 100%;
+      justify-content: center;
+      .util-btns{
+        max-width: 550px;
+            margin: 20px 0px;
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            .list-btn{
+                width:77px;
+            }
+      }
+  }
+
+
+
+  .comment-form-label{
+
+    }
+
+  .cider-like-btn{
+      padding:10px 20px;
+
+      &.me{
+          border-width: 2px;
+          font-weight: bold;
+      }
+      cursor: pointer;
+      &:hover{
+          opacity: 0.8;
+      }
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border : 1px solid $global-theme-color;
+  }
+
+  .content-area{
+      padding:20px;
+      @media screen and (max-width:500px) {
+        padding: 10px;
+    }
+
+  }
+
+  .comment-area{
+      margin-top:15px;
+    padding: 15px 15px 45px 15px;
+    @media screen and (max-width:500px) {
+        padding: 5px !important;
+    }
+
+    .comment-area-header{
+        font-size: 14px !important;
+        margin-bottom: 10px;
+    }
+
+    .comment-input-form{
+        display: inline-flex;
+        align-items: center;
+        width: 100%;
+        textarea{
+            flex: 5
+        }
+        .btn-wrapper{
+            // flex: 2;
+            margin-left:5px;
+            display: inline-flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            align-items: center;
+            .comment-register-btn{
+              background: $global-theme-color    !important;
+              border:none !important
+            }
+
+            .comment-update-btn{
+              background: orange    !important;
+              border:none !important
+            }
+            .comment-update-cancel-btn{
+                background: #bbb    !important;
+              border:none !important
+            }
+            .comment-register-empathy-btn{
+                margin-left: 10px;
+                @media screen and (max-width: 768px){
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .comment-wrapper{
+
+        &.ctc{
+            margin-left: 24px;
+        }
+
+        margin-bottom: 25px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        #commentForm{
+            display: block !important;
+        }
+
+        .comment-header{
+            &.self-comment{
+                background: lighten($color: $global-theme-color, $amount: 40) !important; 
+            }
+            &.comment-author-is-me{
+                background: lighten($color: blue, $amount: 45) !important; 
+            }
+            &.comment-update{
+                background: lighten($color: orange, $amount: 45) !important; 
+            }
+            padding: 4px;
+            background: #ddd;
+            &.ctc{
+                background: #eee  ;
+            }
+            margin-bottom: 2px;
+            width: 100%;
+            display: inline-flex;
+            justify-content: space-between;
+            align-items: center;
+            .comment-author{
+                font-size: .83rem;
+                color: #888;    
+                font-weight: 600;
+            }
+            .comment-created-at{
+                font-size: 11px;
+                color: #bbb
+            }
+        }
+        .comment-content{
+            padding: 3px 0px 7px 7px;
+            width: 100%;
+            display: inline-flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+            &.mobile{
+                display: flex;
+                align-items: flex-start !important;
+                flex-direction: column;
+                .content-body{
+                    margin-bottom: 8px;
+                }
+                .comment-tools{
+                    align-self: flex-end !important;
+                    font-size: 14px;
+                    .tool{
+                        margin-left: 15px;
+                    }
+                }
+            }
+
+            
+            .content-body{
+                margin-right: 15px;
+                .mention-col{
+                    color: darken($color: aqua, $amount: 20) ;
+                    margin-right: 15px;
+                }
+                flex:7;
+                
+                word-break: break-all;
+            }
+            .comment-tools{
+                flex:2;
+                display: inline-flex;
+                justify-content: flex-end;
+                .tool{
+                    cursor: pointer;
+                    &:hover{
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+  }
+
+
+
+  .share-btns{
+    padding-top:20px;
+    .share-btns-header{
+        font-size:13px;
+        color:#888;
+        text-align: center
+    }
+    .btn-list{
+        display:inline-flex;
+        .facebook-share-btn{
+            margin-right: 8px;
+        }
+    }
+  }

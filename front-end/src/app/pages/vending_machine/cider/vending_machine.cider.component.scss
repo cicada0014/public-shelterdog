@@ -1,0 +1,212 @@
+@import '../../../../global-theme.scss';
+
+
+.detail-header{
+    margin:  0 !important;
+    background: white ;
+    // border-bottom: 1.5px solid #eee !important;
+    &.mobiled{
+        background: transparent;
+    }
+    .sub-header{
+        font-size:18px;
+        font-weight: 500;
+        padding: 10px 30px;
+        @media screen and (max-width : 768px) {
+            padding: 10px 20px;
+        };
+
+        @media screen and (max-width : 768px) {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        };
+        display: inline-flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        .sub-header-main{
+
+        }
+        .sub-header-sub{
+            font-size: 13px;
+            color:orange;
+            font-weight: 300;
+        }
+
+
+
+    }
+
+    .refuge-name{
+        display: inline-flex;
+        font-size: 1.42rem;
+        padding: 20px;
+        padding-bottom: 10px !important;
+        @media screen and (max-width : 768px) {
+            padding: 5px;
+        }
+        .name-row{
+            margin-right: 25px;
+            display: inline-flex;
+            font-weight: 500;
+            // font-size: 17px;
+            align-items: center;
+            .refuge-default-name{
+                margin-left: 7px;
+            }
+        }
+    }
+}
+
+
+
+
+.vending-machine-content-wrapper{
+    padding:10px 20px 20px 20px;
+
+
+    @media screen and (max-width : 768px) {
+        padding: 5px;
+    }
+    
+    .tag-line{
+        border-color :  rgb(72, 219, 14);
+        border-width: 1.5px;
+    }
+
+    .tag-list-wrapper{
+        border-top: 1.5px solid rgb(80, 168, 36);
+        border-bottom: 1.5px solid rgb(80, 168, 36);
+        padding : 20px 10px;
+        margin-bottom: 15px;
+        width: 100%;
+        display: inline-flex;
+        justify-content: space-between;
+        .tag-list-util{
+            min-width: 90px;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            align-items: center;
+
+        }
+        .tag-list-real{
+            // flex: 1;
+            width: 100%;
+            display: inline-flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .tag-button{
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color :#aaa;
+
+            // min-width: 70px; 
+
+            &.selected{
+                font-weight: bold;
+                color : darken($color: $global-theme-color, $amount: 10) ;
+            }
+            padding:10px 20px;
+            &:hover{
+                font-weight: bold
+            }
+            @media screen and (max-width:500px) {
+                padding : 5px 10px;
+            }
+            &.total{
+                text-align: center;
+                margin-bottom: 5px;
+            }
+
+        }
+        .tag-plus{
+            cursor: pointer;
+            color :#aaa;
+            width: 55px;
+            text-align: center;
+            border : 1px solid rgb(80, 168, 36);
+            color: rgb(80, 168, 36);
+            // min-width: 70px; 
+
+            &.selected{
+                font-weight: bold;
+                color : darken($color: $global-theme-color, $amount: 10) ;
+            }
+            border-radius: 5px;
+            padding: 5px 5px;
+            margin:10px 15px;
+            // margin : 0px 5px;
+            &:hover{
+                font-weight: bold
+            }
+            @media screen and (max-width:500px) {
+                margin : 0px 5px;
+            }
+        }
+    }
+    .vending-machine-item-list{
+        width: 100%;
+        display:  inline-flex ; 
+        flex-wrap: wrap;
+        
+        app-vending-machine-item{
+            // float: left;
+            @media screen and (min-width : 1300px) {
+                width: 25%;
+            }
+            @media screen and (max-width : 1299px) and (min-width:993px) {
+                width: 33.3%;
+            }
+            @media screen and (max-width : 992px) {
+                width: 50%;
+            }
+
+        }
+        // @media screen and (min-width : 1300px) {
+        //     column-count: 4;
+        //     app-vending-machine-item:nth-child(4n+1){
+        //         clear: left;
+        //     }
+        //     // width: 25%;
+        // }
+        // @media screen and (max-width : 1299px) and (min-width:993px) {
+        //     column-count: 3;
+        //     app-vending-machine-item:nth-child(3n+1){
+                
+        //         clear: left;
+        //     }
+        //     // width: 33.3%;
+        // }
+        // @media screen and (max-width : 992px) {
+        //     column-count: 2;
+        //     app-vending-machine-item:nth-child(2n+1){
+        //         clear: left;
+        //     }
+        //     // width: 50%;
+        // }
+        
+    }
+
+}
+
+.vending_machine_list_spinner{
+    // position: fixed;
+        // top:0;
+        // height: 100vh;
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        .back{
+            position: fixed;
+            top:0;
+            height: 100%;
+            width: 100%;
+            background: rgba($color: #000000, $alpha: 0.1)
+        }
+}

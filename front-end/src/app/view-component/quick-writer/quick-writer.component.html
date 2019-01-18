@@ -1,0 +1,87 @@
+<!-- <textarea *ngIf="!isFocus" placeholder="아무거나 써보세요" name="" id="" cols="30" rows="10" (focus)="isFocus = true"></textarea> -->
+
+<div [ngClass]="{'overlay':isActive}" (click)="isActive = false">
+
+</div>
+
+
+<div class="p-grid p-justify-center wrapper-layout-template " [ngClass]="{'wrapper-layout': isActive    }">
+    <!-- <div *ngIf="!isMobile && isActive " class="p-col p-lg-2 side-overlay ">
+
+    </div> -->
+
+    <div [ngStyle]="{'max-width': maxWidth  }  " class="writer-wrapper p-col p-lg-12 p-md-12 p-sm-12" [ngClass]="{'active':isActive ,'wrapper-mobile':isMobile ,'simple':isSimple,'not-active':!isActive}">
+        <div class="writer-header" [ngClass]="{'simple':isSimple,'not-active':!isActive} ">
+
+            <div class="writer-header-content" [ngClass]="{'simple':isSimple}">
+                <div style="font-size : 15px; padding : 10px 10px 10px 15px  ; ">
+                    <span *ngIf="!isSimple">
+                        꺼내놓기
+                    </span>
+                </div>
+                <div *ngIf="isActive" style="margin-right: 10px; cursor:pointer" (click)="isActive = false">
+                    <i class="fas fa-times"></i>
+                </div>
+
+            </div>
+        </div>
+        <div *ngIf="isActive && !isSimple" class="writer-title-form">
+            <div style="height: 100%;  width : 100% ; display: inline-flex; justify-content: space-between; align-items: center">
+                <div class="ui-inputgroup" style="width : 65%">
+                    <!-- <span style="font-size :13px;" class="ui-inputgroup-addon">제목</span> -->
+                    <input [(ngModel)]="title" style=" padding-left : 15px;  border:none ;    width: 100%;height: 39px;border-right: 1px solid #eee;"
+                        type="text" pInputText placeholder="제목을 입력하세요.">
+                    <p-checkbox name="groupname" label="익명" [(ngModel)]="isAnonymous" binary="true"></p-checkbox>
+                </div>
+                <div *ngIf="!isMobile" class="header-box-wrapper">
+                    <div [ngClass]="{'selected' : selectedHeader.value == header.value}" class="header-box" *ngFor="let header of articleHeaders"
+                        (click)="selectHeader(header)">
+                        {{header.label}}
+                    </div>
+                </div>
+                <div *ngIf="isMobile" class="header-box-wrapper" style="margin-right:5px">
+                    <p-dropdown [options]="articleHeaders" [(ngModel)]="selectedHeader"></p-dropdown>
+                </div>
+            </div>
+        </div>
+        <div class="writer-body" [ngClass]="{'simple':isSimple}">
+            <div #quickEditor id="quick-editor" style="width:100%; height: 80px" [ngClass]="{'no-blank' : checkBlank()     }">
+            </div>
+        </div>
+        <div class="writer-footer" *ngIf="isActive">
+            <div class="upload-area" [ngClass]="{'more-margin' : maxWidth == '100%' }">
+                <div style="display:inline-flex ; align-items: center">
+                    <p-fileUpload *ngIf="!isSimple " chooseLabel="첨부" uploadLabel="업로드" cancelLabel="전부 취소"
+                        invalidFileTypeMessageSummary="이미지 파일만 됩니다." invalidFileSizeMessageSummary="파일 사이즈가 5MB를 넘을 수 없습니다."
+                        maxFileSize="5242880" accept="image/*" name="myfiles" customUpload="true" (uploadHandler)="myUploader($event)"
+                        [files]="myfiles" [multiple]="false" [auto]="true">
+                    </p-fileUpload>
+
+                    <div *ngIf="isSimple " style="padding: 0.571em 1em;">
+                        &nbsp;
+                    </div>
+                    <div *ngIf="uploadProgress > 0" style=" font-size : 13px; color:#888;">
+                        <div style="margin-right:15px;">
+                            Uploading... {{uploadProgress}}%
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="save-btn" *ngIf="isActive" [ngClass]="{'more-margin' : maxWidth == '100%' }">
+                <div>
+                    <button *ngIf="!isUploading" (click)="save()" pButton type="button" [label]=" '작성하기' "></button>
+                    <button *ngIf="isUploading" [disabled]="true" style="word-break: keep-all; background : #bbb ; cursor: default;"
+                        pButton type="button" [label]="'저장 중...'"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- <div *ngIf="!isMobile && isActive" class="p-col p-lg-2 side-overlay  ">
+
+    </div> -->
+</div>

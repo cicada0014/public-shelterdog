@@ -1,0 +1,127 @@
+<div class="p-grid p-justify-between p-align-center detail-header ">
+    <div class="p-col refuge-name">
+        도피처 요청
+    </div>
+    <div class="request-form">
+        <div class="ui-inputgroup  ">
+            <!-- <span class="ui-inputgroup-addon">요청</span> -->
+            <input style="width:100%;" type="text" [(ngModel)]="requestContent" pInputText maxlength="40" placeholder="최대 40자까지 입력 가능합니다. 작성 후 삭제 및 수정 불가">
+            <button class="request-btn" (click)="requestRefuge()" pButton type="button" label="요청"></button>
+        </div>
+
+    </div>
+
+</div>
+<div class="refuge-article-list-wrapper">
+    <p-dataView *ngIf="!isMobile" [loading]="false" [value]="items" [paginator]="true" [rows]="requestRow" [lazy]="true"
+        (onLazyLoad)="loadData($event)" [totalRecords]="totalRecords">
+        <p-header>
+            <!-- <p-dataViewLayoutOptions></p-dataViewLayoutOptions> -->
+            <div class="p-grid " style="padding: 0.071em 0.5em;">
+                <div class="p-col-6">
+                    제목
+                </div>
+                <div class="p-col-2">
+                    작성자
+                </div>
+                <div class="p-col-2">
+                    존중 수
+                </div>
+                <!-- <div class="p-col-2">
+                    작성 시간
+                </div> -->
+                <div class="p-col-2">
+                    존중
+                </div>
+            </div>
+
+        </p-header>
+
+        <ng-template let-request pTemplate="listItem">
+            <div class="p-grid no-pointer">
+                <div class="p-col-6" style="text-align:left">
+                    {{request.content}}
+                    <small>
+                        <!-- [{{article.RefugeArticleComments? article.RefugeArticleComments.length : 0}}] -->
+                    </small>
+                </div>
+                <div class="p-col-2">
+                    {{request.UserProfile?.nickname}}
+                </div>
+                <div class="p-col-2">
+                    <small>
+                        {{request.GraphObject?.GraphEdges ? request.GraphObject?.GraphEdges.length : 0 }}
+                    </small>
+                </div>
+                <!-- <div class="p-col-2">
+                    <small>
+                        {{convertTime(request.created_at) }}
+                    </small>
+                </div> -->
+                <div class="p-col-2" style="   display: inline-flex;justify-content: center;">
+                    <div class="empathy-btn" (click)="empathize(request)">
+                        <div>
+                            <!-- <i class="far fa-laugh"></i> -->
+                            존중!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+        <!-- <p-footer class="p-grid p-justify-center p-align-center">
+            <p-dropdown [options]="[{label:'제목',value:'title'},{label:'작성자', value:'nickname'}]" [(ngModel)]="searchTarget"></p-dropdown>
+            <div class="ui-inputgroup">
+                <input type="text" pInputText placeholder="검색" (keyup)="search()">
+                <button (click)="search()" pButton type="button" icon="fa fa-search" class="ui-button-warn"></button>
+            </div>
+        </p-footer> -->
+    </p-dataView>
+    <div *ngIf="isMobile" class="search-results" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="1000"
+        (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)" [infiniteScrollUpDistance]="0.1">
+        <div class="mobild-article-row  p-grid p-justify-between" *ngFor="let request of infiniteList ; ">
+            <div class="p-col-12 article-top">
+                <div class="author">
+                    {{request.UserProfile?.nickname}}
+                </div>
+                <!-- <div class="created-at">
+                    {{convertTime(request.created_at) }}
+                </div> -->
+            </div>
+            <!-- <div *ngIf="article.thumbnail" class="p-col-12 article-img">
+                <img [src]="article.thumbnail" alt="">
+            </div> -->
+            <div class="p-col-12 article-body ">
+                <div class="title">
+                    <span>
+                        {{request.content}}
+                    </span>
+
+                </div>
+                <div class="hit-empathy">
+                    <div class="empathy">
+                        <!-- <i class="far fa-laugh"></i> -->
+                        <span>
+                            존중
+                        </span>
+                        <span *ngIf="itemId !='best'">
+                            {{request.GraphObject?.GraphEdges ? request.GraphObject?.GraphEdges.length : 0 }}개
+                        </span>
+
+                    </div>
+                    <div class="empathy-btn mobiled" (click)="empathize(request)">
+                        <div>
+                            <!-- <i class="far fa-laugh"></i> -->
+                            존중!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- <p-progressSpinner *ngIf="progressDisplay" [style]="{'width':'30px'}"></p-progressSpinner> -->
+    </div>
+
+</div>
+
+<p-toast position="top-right" key="request-toast"></p-toast>

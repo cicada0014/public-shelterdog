@@ -1,0 +1,38 @@
+.podcast-title{
+    &.mobile{
+        margin-top:0px;
+    }
+    margin-top:10px;
+    width: 100%;
+    align-items: center;
+    display: inline-flex;
+    justify-content: space-between;
+    .name-title{
+        font-size: 14px;
+
+    }
+
+    .podcast-created-at{
+        font-size: 12px;
+        color : #999;
+    }
+
+
+}
+
+.podcast-info{
+    padding:20px 15px 45px 15px;
+
+    .info{
+        font-size:18px;
+        font-weight: 500;
+        line-height: 1.6
+    }
+
+    &.mobile {
+        padding:10px 15px !important;
+        .info{
+            font-size:16px;
+        }
+    }
+}

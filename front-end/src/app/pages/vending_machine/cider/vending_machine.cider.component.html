@@ -1,0 +1,65 @@
+<div class="p-grid p-justify-between p-align-center detail-header " [ngClass]="{mobile : isMobile}">
+    <div class="p-col-9 refuge-name">
+        <div class="name-row">
+            <span class="refuge-default-name">
+                <span style="color : rgb(46, 145, 7) ; ">
+                    사이다
+                </span>
+                <span>
+                    자판기
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="sub-header">
+        <span class="sub-header-main">
+            속이 답답해? 원하는 사이다 썰을 자유롭게 뽑아 마셔봐~!
+        </span>
+        <span class="sub-header-sub">*사이다 썰은 매주 새로 업로드 됩니다!</span>
+    </div>
+</div>
+
+
+
+<div class="vending-machine-content-wrapper">
+
+    <!-- <hr class="tag-line"> -->
+
+
+    <div class="tag-list-wrapper">
+        <div class="tag-list-util">
+            <span class="tag-button total" [ngClass]=" {'selected':-1 == selectedItemTag.tag_id} " (click)="classifyItemsWithTag({tag_id : -1})">
+                #전체
+            </span>
+            <span class="tag-plus" style="font-size:14px;" (click)="plusAdditionalTags()">
+                +태그
+            </span>
+        </div>
+        <div class="tag-list-real">
+            <span class="tag-button" [ngClass]=" {'selected':itemTag.tag_id == selectedItemTag.tag_id} " *ngFor="let itemTag of itemHashTags"
+                (click)=" classifyItemsWithTag(itemTag)  ">
+                #{{itemTag.HashTag.name}}
+            </span>
+        </div>
+    </div>
+    <!-- <hr class="tag-line"> -->
+
+
+
+    <div class="vending-machine-item-list ">
+        <app-vending-machine-item [item]="item" *ngFor="let item of items"></app-vending-machine-item>
+    </div>
+    <div class="vending_machine_list_spinner" *ngIf="items.length == 0">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+
+    <div style="margin-top:35px;margin-bottom: 30px;">
+        <p-paginator #pPaginator [rows]="12" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+
+    </div>
+
+    <app-cta-facebook-like></app-cta-facebook-like>
+
+
+
+</div>

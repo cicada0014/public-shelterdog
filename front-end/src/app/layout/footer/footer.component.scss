@@ -1,0 +1,41 @@
+@import '../../../global-theme.scss';
+
+
+
+:host{
+    .footer-wrapper{
+        min-height: 30vh;
+        padding: 25px 0px;
+        background: $global-theme-black-color;
+    }
+
+    .footer-items{
+        @media screen and (max-width: 768px){
+            font-size: 0.6rem;
+        }
+
+        display: inline-flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        // padding-top: 50px;
+        font-size: .9rem;
+        .footer-item{
+            cursor: pointer;
+            color: #bbb;
+            padding: 10px 20px;
+        }
+    }
+    .site-info{
+        width: 100%;
+        text-align: center;
+        .copyright-text,.address-text{
+            @media screen and (max-width: 768px){
+                font-size: 0.5rem;
+            }
+            color: #bbb;
+            padding: 10px 20px;
+            font-size: .8rem
+        }
+    }
+}

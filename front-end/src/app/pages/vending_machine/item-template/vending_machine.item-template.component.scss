@@ -1,0 +1,105 @@
+
+.head-additional{
+    position: relative;
+    right: 2.5% ;
+    bottom: -25px;
+    height:0px;
+    width:100%;
+    display:inline-flex;
+    justify-content:flex-end;
+    .info-wrapper{
+        opacity: 1 !important;
+        background: #666;
+        border-radius: 5px;
+        color:#eee;
+        font-size:12px;
+        display: inline-flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 30px;
+        width: auto;
+        padding : 0px 5px;
+        // color : darken($color: rgb(17, 179, 90), $amount: 12)  ;
+        // background: #fff;
+    }
+}
+.vending-machine-item-tag-wrapper{
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.vending-machine-item{
+    width: 95%;
+    cursor: pointer;
+    background: #fff;
+    // width:25%;
+    border: #aaa 2px solid;
+    // padding:10px;
+
+
+    
+    .item-thumbnail{
+        // position: relative;
+        // top:-30px;
+    }
+    .vending-machine-item-title{
+        padding:10px;
+        height: 71px;
+        word-break: break-all;
+        width: 100%;
+        font-weight: bold;
+        font-size:17px;
+        // position: relative;
+        // top: -20px;
+        @media screen and (max-width : 768px) {
+            font-size: 15px;
+        }
+    };
+    .vending-machine-item-tag-wrapper{
+        padding:10px;
+        width: 100%;
+        display: inline-flex;
+        flex-wrap: wrap;
+        height: 65px;;
+        justify-content: flex-start;
+        position: relative;
+        top:-10px;
+        .vending-machine-item-tag{
+            margin-right: 3px;
+            font-size:14px;
+            color : #888;
+            @media screen and (max-width : 768px) {
+                font-size: 12px;
+            }
+        }
+        
+    }
+    &:hover{
+        // opacity: 0.8;
+        border: 3px solid black;
+    }
+    img{
+        width:100%;
+        max-width: 100%;
+    }
+    .additional-wrapper{
+        position: relative;
+        top:-20px;
+        padding: 0px 10px;
+        font-size:12px;
+        width:100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        .additional-label{
+            @media screen and (max-width : 500px) {
+                display: none;
+            }
+        }
+        .cider-power-stat{
+            color : rgb(17, 179, 90)
+        }
+    }
+}

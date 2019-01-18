@@ -1,0 +1,21 @@
+<div class="p-grid p-justify-between p-align-center detail-header ">
+    <div class="p-col header-title">
+        공지사항
+    </div>
+</div>
+
+
+<div class="list-wrapper">
+    <p-dataView [value]="items">
+        <ng-template let-item pTemplate="listItem">
+            <div class="notice-title" (click)="goToNotice(item.id)"  >
+                <span style="margin-left: 15px;">
+                    {{item.title}}
+                </span>
+                <span style="font-size : 11px;">
+                    {{convertTime( item.created_at) }}
+                </span>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

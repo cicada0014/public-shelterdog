@@ -1,0 +1,161 @@
+<div class="haewooso-body">
+
+
+    <div class="haewooso-header">
+        <div class="haewooso-header-text">
+            <span>
+                쉘터독
+            </span>
+            <span style="color : #2E64FE">
+                해우소
+            </span>
+        </div>
+
+        <div class="haewooso-description">
+            하고 싶지만 하지 못 했던 말 , 짜증났었던 일, 나에게 해주고 싶은 말 등을 편하게 적어보세요.
+            <br>
+            <span class="haewooso-notice">익명으로 작성이 되며, 24시간 뒤 자동으로 삭제 됩니다. 삭제는 매 시 정각에 실행됩니다.</span>
+            <br>
+
+
+            <!-- 쉘터독 해우소에서 <span>하고 싶었던 말</span>을 뱉어가며 기분을 풀어보세요! -->
+        </div>
+    </div>
+    <div style="background: #fff">
+        <quick-writer-component [maxWidth]="'600px'" (uploadCompleate)="uploadCompleate()" [target]="'haewooso'"
+            [isSimple]="true" [placeholderCore]="'오늘은 진짜 뭔가 안 풀리는 날이에요. 여유있게 나갔는데도 지하철도 연착되구 버스도 놓쳐서 지각도하구요... 열심히 하던 프로젝트는 상사한테 완전 깨지고 있네요. 잘했다고 수고했다고 칭찬 받을 줄 알았는데 ... 오늘은 참 힘든 하루에요.'"></quick-writer-component>
+    </div>
+
+    <hr style="margin: 0px ;">
+
+    <div *ngIf="infiniteList.length  == 0" style="   text-align: center; font-weight: bold;">
+        오늘의 첫 번째 해우소 사용자가 되어보세요!
+    </div>
+
+    <div *ngIf="infiniteList.length>0" class="search-results" infiniteScroll [infiniteScrollDistance]="0.1"
+        [infiniteScrollThrottle]="1000" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)"
+        [infiniteScrollUpDistance]="0.1">
+        <div class="article-row-wrapper" *ngFor="let article of infiniteList ; let i = index ">
+            <div class="mobild-article-row  p-grid p-justify-between" [ngClass]="{'curread': article.curread}">
+                <div class="p-col-12 article-top-wrapper  ">
+                    <div class="article-top">
+                        <div class="author">
+                            {{article.id}}번째 소리
+                        </div>
+                        <div class="created-at">
+                            <span class="time-display">
+                                {{convertTime(article) }}
+                            </span>
+                            <span class="del-display">
+                                {{displayDelTime(article) }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div *ngIf="article.thumbnail" class="p-col-12 article-img">
+                    <img [src]="article.thumbnail" alt="" style="max-height:200px;">
+                </div> -->
+                <div class="p-col-12 article-body " *ngIf="article">
+                    <div class="title">
+                        <div class="article-content" [id]="'real-content' + i" [innerHTML]="article.content">
+                        </div>
+                        <div class="article-delete-btn">
+                            <i (click)="deleteConfirmArticle(article)" style="cursor:pointer" *ngIf="article.user_id == userId || isAdmin "
+                                class="fas fa-times"></i>
+                        </div>
+
+                    </div>
+                    <div class="expand-fold-btn" *ngIf="checkExpandFoldArticle(article,i)">
+                        <div style="display:inline-flex; align-items: center" (click)="article.curread = article.curread ? false : true;  ">
+                            <i *ngIf="article.curread" class="fas fa-chevron-up" style="margin-right:5px"></i>
+                            <i *ngIf="!article.curread" class="fas fa-chevron-down" style="margin-right:5px"></i>
+                            {{article.curread ? '접기' : '펼치기'}}
+                        </div>
+                    </div>
+                    <div class="hit-empathy">
+                        <div class="empathy" (click)="empathyAction($event,article)" [ngClass]="{'me':article.meEdge}">
+                            <span>
+                                공감하기 {{article.GraphObject && article.GraphObject.GraphEdges?
+                                article.GraphObject.GraphEdges.length : ''}}
+                            </span>
+                        </div>
+                        <div class="comment" (click)="article.activeComment = article.activeComment ? false :true ">
+                            <span>
+                                댓글
+                            </span>
+                            <span>
+                                <span>
+                                    {{article.HaewoosoArticleComments.length}}개
+                                </span>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="coment-area" *ngIf="article.activeComment">
+
+                        <div id="commentForm">
+                            <div class="comment-input-form" style="padding:15px;">
+                                <textarea autoResize="true" maxlength="1999" #commentFormRef pInputTextarea
+                                    [placeholder]="'댓글을 달아보세요!'"></textarea>
+                            </div>
+                            <div class="btn-wrapper">
+                                <button (click)="commentToArticle(article, commentFormRef)" pButton type="button" class="ui-button-info comment-register-btn"
+                                    label="등록">
+                                </button>
+                            </div>
+                        </div>
+
+                        <div *ngFor="let haewooso_comment of article.HaewoosoArticleComments">
+                            <div class="haewooso-comment-display">
+                                <div class="haewooso-comment-hedaer">
+                                    <div class="comment-name">
+                                        익명
+                                    </div>
+                                    <div class="comment-time">
+                                        {{convertTime(haewooso_comment)}}
+                                    </div>
+
+                                </div>
+                                <div class="haewooso-comment-content-wrapper">
+                                    <div class="haewooso-comment-content">
+                                        {{haewooso_comment.content}}
+                                    </div>
+                                    <div class="haewooso-comment-delete-btn">
+                                        <i (click)="deleteCommmentConfirm(article.HaewoosoArticleComments, haewooso_comment)"
+                                            style="cursor:pointer" *ngIf="haewooso_comment.user_id == userId || isAdmin "
+                                            class="fas fa-times"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="infeed-sense" *ngIf="i % 5 == 4" style="width: 100%; border-radius : 20px; ">
+
+
+                <!-- 해우소 인피드 링크광고만 -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2127030706496959" data-ad-slot="8251888751"
+                    data-ad-format="link" data-full-width-responsive="true"></ins>
+                <!-- <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-gw-1+16-3y+52"
+                    data-ad-client="ca-pub-2127030706496959" data-ad-slot="9776675683"></ins> -->
+                <script>
+                    setTimeout(() => {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }, 1500);
+                </script>
+            </div>
+        </div>
+        <p-progressSpinner *ngIf="progressDisplay" [style]="{'width':'30px'}"></p-progressSpinner>
+    </div>
+
+
+
+
+
+
+</div>

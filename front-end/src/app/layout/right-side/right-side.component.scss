@@ -1,0 +1,13 @@
+:host{
+    max-width: 160px;
+    min-width: 160px;
+    padding-left : 10px;
+}
+
+.fix{
+    position:fixed;
+    _position:absolute;
+    width:100%;
+    top:0;
+    z-index:100
+}

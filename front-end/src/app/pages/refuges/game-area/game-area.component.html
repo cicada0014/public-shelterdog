@@ -1,0 +1,29 @@
+<p-panel>
+
+    <p-header>
+        <div style="display:inline-flex; width:100%; justify-content:space-between">
+            <span class="ui-panel-title" style="font-size:16px;display:inline-block">오락실 - <small>게임을 통해 대놓고 싫어함을
+                    표출하세요!</small> </span>
+            <span style="margin-top: 2px;color: #fff;cursor:pointer" (click)="goGameIndex()">더 보기</span>
+        </div>
+    </p-header>
+
+
+    <div style="padding: 30px;" class="p-grid ">
+        <div class="game-item" *ngFor="let item of items" (click)="goToItem(item)" style=" width: 50%" [ngStyle]="{padding: isMobile ? '5px' : '15px'}">
+            <p-card [title]="item.krtitle" [style]="{'cursor':'pointer', 'width': '100%', 'height': isMobile ? '150px': 'auto'  }"
+                styleClass="ui-card-shadow" [ngClass]="{mobile: isMobile}">
+                <p-header>
+                    <img style="width:100%" [src]="item.img">
+                </p-header>
+                <div *ngIf="!isMobile">
+                    {{item.description}}
+                </div>
+                <!-- <p-footer>
+                            <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
+                            <button pButton type="button" label="Cancel" icon="pi pi-times" class="ui-button-secondary"></button>
+                        </p-footer> -->
+            </p-card>
+        </div>
+    </div>
+</p-panel>

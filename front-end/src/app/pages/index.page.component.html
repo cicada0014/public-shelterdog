@@ -1,0 +1,49 @@
+<app-sign-in-dialog></app-sign-in-dialog>
+<app-reset-password-dialog></app-reset-password-dialog>
+
+<div class="index-page-messages">
+    <p-messages [key]="'update'" (click)="reload()" [style]="{'width':'100%', 'z-index':9999, 'position':'fixed',  'margin-top': '-7px', 'cursor':'pointer'}"
+        [(value)]="msgs"></p-messages>
+    <p-messages [key]="'browser'" [style]="{'width':'100%','z-index':9999, 'position':'fixed', 'margin-top': '-7px', 'cursor':'pointer'}"
+        [(value)]="browserCheckMsg"></p-messages>
+</div>
+<app-mobile-gnb-tabs *ngIf=" !isFullScreen && isMobile"></app-mobile-gnb-tabs>
+
+
+<section class="" style="width:100%; display:inline-flex ; justify-content: space-between" (mouseenter)="closeMenu($event)"
+    [ngClass]="{'full-screen' : isFullScreen ,'mobile' : isMobile}">
+    <app-left-side style=" flex : 1; margin-left:15px" *ngIf="!isWide" class=" "></app-left-side>
+    <div></div>
+    <div id="content-body" [ngClass]="{'full-screen' : isFullScreen ,'mobile':isMobile }">
+
+        <router-outlet></router-outlet>
+    </div>
+    <div></div>
+    <app-right-side style="flex : 1;  margin-right:15px" *ngIf="!isWide" class=" ">
+    </app-right-side>
+</section>
+<app-header *ngIf="!isFullScreen"></app-header>
+<div class="for-gnb-list" *ngIf="isMobile " [ngClass]="{'no-display' : gnbTabCurrSelected == 'none'}">
+    <div class="gnb-item-wrapper" [ngClass]="{'no-display' : gnbTabCurrSelected=='none' ,'justify-start':gnbTabCurrSelected=='refuge' , 'justify-end':gnbTabCurrSelected=='about'     }">
+        <div class="gnb-item" *ngFor="let navitem of forGNBItems[gnbTabCurrSelected]" (click)="goNavItem(navitem)">
+            {{navitem.label}}
+        </div>
+
+    </div>
+</div>
+
+<app-footer *ngIf="!isFullScreen"></app-footer>
+
+
+<app-scroll-top-tool></app-scroll-top-tool>
+
+
+<!-- <div id="no-user-blocker">
+</div> -->
+
+
+
+<p-toast position="top-right" key="index-page-toast"></p-toast>
+
+<p-progressSpinner [ngClass]="{'not-ready':!routingSpinner}" id="routing-spinner" [style]="{positon:'fixed !important' , 'margin-top' : '-25px', 'margin-left':'-25px','top':'50%',left :'50%', width: '50px', height: '50px'}"
+    strokeWidth="8" animationDuration=".4s"></p-progressSpinner>

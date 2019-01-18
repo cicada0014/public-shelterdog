@@ -1,0 +1,167 @@
+@import '../../../../global-theme.scss';
+.comment-input-form{
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    textarea{
+        flex: 5
+    }
+    .btn-wrapper{
+        flex: 2;
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: center;
+        .comment-register-btn{
+          background: $global-theme-color    !important;
+          border:none !important
+        }
+
+        .comment-update-btn{
+          background: orange    !important;
+          border:none !important
+        }
+        .comment-update-cancel-btn{
+            background: #bbb    !important;
+          border:none !important
+        }
+        .comment-register-empathy-btn{
+            margin-left: 10px;
+            @media screen and (max-width: 768px){
+                display: none;
+            }
+        }
+    }
+}
+
+.comment-wrapper{
+
+    &.ctc{
+        margin-left: 24px;
+    }
+
+    margin-bottom: 25px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    #commentForm{
+        display: inline-flex !important;
+    }
+
+    .comment-header{
+        &.self-comment{
+            background: lighten($color: $global-theme-color, $amount: 40) !important; 
+        }
+        &.comment-author-is-me{
+            background: lighten($color: blue, $amount: 45) !important; 
+        }
+        &.comment-update{
+            background: lighten($color: orange, $amount: 45) !important; 
+        }
+        padding: 4px;
+        background: #ddd;
+        &.ctc{
+            background: #eee  ;
+        }
+        margin-bottom: 2px;
+        width: 100%;
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        .comment-author{
+            font-size: .83rem;
+            color: #888;    
+            font-weight: 600;
+        }
+        .comment-created-at{
+            font-size: 11px;
+            color: #bbb
+        }
+    }
+    .comment-content{
+        padding: 3px 0px 7px 7px;
+        width: 100%;
+        display: inline-flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        &.mobile{
+            display: flex;
+            align-items: flex-start !important;
+            flex-direction: column;
+            .content-body{
+                margin-bottom: 8px;
+            }
+            .comment-tools{
+                align-self: flex-end !important;
+                font-size: 15px;
+                .tool{
+                    margin-left: 15px;
+                }
+            }
+        }
+
+        
+        .content-body{
+            margin-right: 15px;
+            .mention-col{
+                color: darken($color: aqua, $amount: 20) ;
+                margin-right: 15px;
+            }
+            flex:7;
+            
+            word-break: break-all;
+        }
+        .comment-tools{
+            flex:2;
+            display: inline-flex;
+            justify-content: flex-end;
+            .tool{
+                cursor: pointer;
+                &:hover{
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+
+.article-share-tool{
+    margin:30px 0px 10px 0px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    #kakao-link-btn{
+        img,span{
+            cursor: pointer;
+        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-width: 200px;
+        color: #000;
+        font-size: 11px;
+        font-weight: bold;
+    }
+    
+
+}
+
+.injected-text{
+    margin:20px;
+}
+.about-text{
+    color : orange ; 
+    font-size : 18px ;   
+    cursor: pointer; 
+}
+
+.about-text, .injected-text{
+    @media only screen and (max-device-width : 640px) {
+        font-size: 10px;
+        }
+}

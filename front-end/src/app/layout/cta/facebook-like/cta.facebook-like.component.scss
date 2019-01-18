@@ -1,0 +1,44 @@
+:host{
+    width: 100%;
+    margin-top: 50px;
+
+    .iframe-wrapper{
+        margin-top:20px;
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cta-facebook-like{
+        cursor: pointer;
+        &:hover{
+            opacity: 0.8;
+        }
+        margin: 15px 0px 30px 0px;
+        padding: 0px 5px;
+        display: inline-flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        img{
+            flex:3;
+            &.desktop{
+                max-width:728px;
+                @media screen and(max-width:500px) {
+                    display: none;
+                }
+
+            }
+            &.mobile{
+                max-width:350px;
+                @media screen and(min-width:501px) {
+                    display: none;
+                }
+            }
+        }
+        iframe{
+            flex:1;
+        }
+    }
+}

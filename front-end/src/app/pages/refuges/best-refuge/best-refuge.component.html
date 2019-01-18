@@ -1,0 +1,74 @@
+<!-- <p-carousel *ngIf="items.length > 0" headerText="베스트 도피글" [value]="items" circular="circular" firstVisible="0"
+    [ngClass]="{'isMobile':isMobile}" numVisible="4" [responsive]="true">
+    <ng-template let-item pTemplate="item">
+        <div (click)="goToArticle(item)">
+            <div class="image-row  ui-grid ui-grid-responsive">
+                
+                <div class="image-wrapper">
+                    <img [src]=" item.thumbnail ?  item.thumbnail  : '../../../assets/imgs/sheldog.png' " alt="">
+                </div>
+            </div>
+            <div class="best-article-title">
+                {{item.title}}
+                <small class="article-comment-count">
+                    ({{item.comment_count}})
+                </small>
+            </div>
+            <div class="best-article-additional" *ngIf="!isMobile">
+                <div class="additional-item">
+                    <i class="far fa-eye" style="margin-right:2px"></i> {{item.hit}}
+                </div>
+                <div class="additional-item">
+                    <i class="far fa-laugh" style="margin-right:2px"></i> {{fixNumber(item.empathy_count) }}
+                </div>
+            </div>
+
+        </div>
+
+    </ng-template>
+</p-carousel>
+
+ -->
+
+
+<p-panel>
+    <p-header>
+        <div style="display:inline-flex; width:100%; justify-content:space-between">
+            <span class="ui-panel-title" style="font-size:16px;display:inline-block">존글 - <small>존중을 많이 받은 글</small></span>
+            <!-- <span style="margin-top: 2px;color: #fff;cursor:pointer" (click)="goGameIndex()">더 보기</span> -->
+        </div>
+    </p-header>
+    <ngu-carousel #myCarousel [inputs]="carouselTile" [dataSource]="items">
+        <ngu-tile *nguCarouselDef="let item; let i = index">
+            <div (click)="goToArticle(item)">
+                <div class="image-row  ui-grid ui-grid-responsive">
+                    <div class="image-wrapper">
+                        <img [src]=" item.thumbnail ?  item.thumbnail  : '../../../assets/imgs/sheldog.png' " alt="">
+                    </div>
+                </div>
+                <div class="best-article-title">
+                    {{item.title}}
+                    <small class="article-comment-count">
+                        ({{item.comment_count}})
+                    </small>
+                </div>
+                <div class="best-article-additional" *ngIf="!isMobile">
+                    <div class="additional-item">
+                        <i class="far fa-eye" style="margin-right:2px"></i> {{item.hit}}
+                    </div>
+                    <div class="additional-item">
+                        <i class="far fa-laugh" style="margin-right:2px"></i> {{fixNumber(item.empathy_count) }}
+                    </div>
+                </div>
+            </div>
+        </ngu-tile>
+        <button *ngIf="!isMobile" NguCarouselPrev class="leftRs" [style.opacity]="myCarousel.isFirst ? 0.5:1">&lt;</button>
+        <button *ngIf="!isMobile" NguCarouselNext class="rightRs" [style.opacity]="myCarousel.isLast ? 0.5:1">&gt;</button>
+        <ul class="ngucarouselPoint" NguCarouselPoint>
+            <li *ngFor="let i of myCarousel.pointNumbers; let i = index" [class.active]="i==myCarousel.activePoint"
+                (click)="myCarousel.moveTo(i)"></li>
+        </ul>
+    </ngu-carousel>
+
+
+</p-panel>

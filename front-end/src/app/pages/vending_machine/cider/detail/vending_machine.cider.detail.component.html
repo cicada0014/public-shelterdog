@@ -1,0 +1,269 @@
+<div *ngIf="item" class="component-wrapper">
+
+
+
+    <div class="content-area">
+
+        <div class="vending-machine-item-title">
+            [{{item.title}}]
+        </div>
+
+        <div class="header-util-wrapper">
+            <div class="item-hash-tag-list">
+                <div *ngFor="let itemTag of item.VendingMachineItemHashTags">
+                    <div *ngIf="itemTag.representation" class="hashtag-item">
+                        #{{itemTag.HashTag.name}}
+                    </div>
+                </div>
+            </div>
+            <div class="item-hit-count">
+                <i class="far fa-eye" style="margin-right:8px"></i>
+                <span>
+                    {{item.hit}}
+                </span>
+            </div>
+        </div>
+        <hr class="tag-line">
+
+
+
+        <div *ngIf="isMobile" style="color:#999">
+            * 좌우로 스와이프해서 글을 읽어 보실 수 있습니다.
+        </div>
+
+
+        <div class="contents-wrapper">
+            <div class="carosel-wrapper" *ngIf="!isExpansion">
+                <ngu-carousel [ngClass]="{'mobile':isMobile}" style="max-width:700px;width: 100% " #myCarousel [inputs]="carouselTile"
+                    [dataSource]="item.VendingMachineItemPages">
+                    <ngu-tile *nguCarouselDef="let item; let i = index">
+                        <div class="image-row-wrapper">
+                            <div class="image-row  ui-grid ui-grid-responsive">
+                                <!-- df -->
+                                <div class="image-wrapper">
+                                    <img [src]=" item.url ?  item.url  : '../../../assets/imgs/sheldog.png' " alt="썰 본문">
+                                </div>
+                            </div>
+                        </div>
+                    </ngu-tile>
+                    <button NguCarouselPrev *ngIf="!isMobile" [ngClass]="{'mobile':isMobile}" class="leftRs"
+                        [style.opacity]="myCarousel.isFirst ? 0.5:1">&lt;</button>
+                    <button NguCarouselNext *ngIf="!isMobile" [ngClass]="{'mobile':isMobile}" class="rightRs"
+                        [style.opacity]="myCarousel.isLast ? 0.5:1">&gt;</button>
+                </ngu-carousel>
+            </div>
+
+
+            <div class="expansion-wrapper" *ngIf="isExpansion">
+
+                <div *ngFor="let page of item.VendingMachineItemPages">
+                    <div class="image-row-wrapper">
+                        <div class="image-row  ui-grid ui-grid-responsive">
+                            <div class="image-wrapper expansion-image">
+                                <img [src]=" page.url ?  page.url  : '../../../assets/imgs/sheldog.png' " alt="썰 본문">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <div class="pointer-wrapper">
+                <div class="current-index-pointer" [ngClass]="{'mobile':isMobile && !isExpansion}">
+                    <div class="expanstion-btn" (click)=" expanseContent() ">
+                        <span>
+                            + {{isExpansion? '접기' : '펼쳐보기' }}
+                        </span>
+                    </div>
+                    <div *ngIf="!isExpansion && pageCarousel">
+                        < <!-- <i class="fas fa-chevron-left"></i> -->
+                            <span>
+                                {{ (pageCarousel.activePoint)+1}}
+                            </span>
+                            &nbsp;/&nbsp;
+                            <span>
+                                {{ item.VendingMachineItemPages.length}}
+                            </span>
+                            >
+                    </div>
+                    <div class="empty-btn">
+                        &nbsp;
+                        <!-- <button NguCarouselPrev class="leftRs" [style.opacity]="pageCarousel?.isFirst ? 0.5:1">&lt;</button>
+                        <button NguCarouselNext class="rightRs" [style.opacity]="pageCarousel?.isLast ? 0.5:1">&gt;</button> -->
+                        <!-- <button (click)="pageControl('prev')">
+                            <</button> 
+                            <button (click)="pageControl()">>
+                        </button> -->
+
+
+                    </div>
+                    <!-- <i class="fas fa-chevron-right"></i> -->
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="util-btns-wrapper">
+            <div class="util-btns">
+                <div class="list-btn">
+                    <button (click)="goList()" pButton type="button" class="ui-button-info" label="목록">
+                    </button>
+                </div>
+                <div class="cider-like-btn" (click)="likeAction()" [ngClass]="{'me':item.meEdge}">
+                    <span>
+                        <img src="../../../../../assets/imgs/coke-bottle.png" alt="사이다">
+                    </span>
+                    <span style="font-size:13px;">
+                        {{item.GraphObject ?item.GraphObject.GraphEdges.length : 0 }}
+                    </span>
+                </div>
+
+                <div class="share-btns"> 
+                    <div class="btn-list">
+                        <div class="facebook-share-btn">
+                            <div (click)="shareFB()">
+                                <img src="../../../../../assets/brands/facebook_small.png" alt="페이스북으로 공유하기">
+                            </div>
+                        </div>
+                        <div class="article-share-tool">
+                            <a id="kakao-link-btn" (click)="shareClick()">
+                                <img src="../../../../../assets/brands/kakaolink_btn_small.png" alt="카톡으로 공유하기">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="share-btns-header">
+                        공유하기
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="recommendation-area" *ngIf="recommendationItemList.length > 0">
+            <p-panel>
+                <p-header>
+                    <div style="display:inline-flex; width:100%; justify-content:space-between">
+                        <span class="ui-panel-title" style="font-size:16px;display:inline-block">관련된 사이다 썰</span>
+                        <!-- <span style="    margin-top: 2px;color: #fff;cursor:pointer" (click)="goPodcast()">더 보기</span> -->
+                    </div>
+                </p-header>
+                <div class="recommendation-list">
+                    <app-vending-machine-item [item]="item" *ngFor="let item of recommendationItemList"></app-vending-machine-item>
+                </div>
+            </p-panel>
+        </div>
+
+
+        <div class="comment-area">
+
+            <div class="article-footer-wrapper">
+                <div class="comment-form-label">
+                    댓글 쓰기 / 제보 하기
+                </div>
+                <div style="margin-bottom:25px;">
+                    <!-- <p-checkbox [(ngModel)]="isCommentAnonymous" label="익명 댓글" binary="true"></p-checkbox> -->
+                    <div class="comment-input-form" style="margin-top:3px;">
+                        <textarea autoResize="true" maxlength="1999" #userCommentForm pInputTextarea placeholder="댓글을 입력하세요."></textarea>
+                        <div class="btn-wrapper">
+                            <button (click)="registComment(userCommentForm)" pButton type="button" class="ui-button-info comment-register-btn"
+                                label="등록">
+                            </button>
+                            <!-- <button (click)="registComment(userCommentForm,'emphathy')" pButton type="button" class="ui-button-secondary comment-register-empathy-btn "
+                                    label="등록+존중">
+                                </button> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="comment-area-header">
+                    댓글목록
+                    ({{item.VendingMachineItemComments?.length}})
+                </div>
+                <p-dataView [value]="item.VendingMachineItemComments " [style]="{'margin-bottom':'10px'}" emptyMessage="댓글이 없습니다.">
+                    <ng-template let-comment pTemplate="listItem">
+                        <div class="comment-wrapper" [id]="'comment'+comment.id" [ngClass]="{'ctc': comment.parent} ">
+                            <div class="comment-header" [ngClass]="{'self-comment' : item.anonymous ? false :   comment.user_id == item.user_id , 'comment-author-is-me' : comment.user_id == userId  , 'comment-update' : comment.isUpdate  ,  'ctc': comment.parent }">
+                                <div class="comment-author">
+                                    <!-- {{comment.anonymous ? '익명' : comment.UserProfile?.nickname}} -->
+                                    {{comment.UserProfile?.nickname}}
+                                </div>
+                                <div class="comment-created-at" *ngIf="isAdmin">
+                                    {{convertTime(comment.created_at)}}
+                                </div>
+                            </div>
+                            <div class="comment-content" [ngClass]="{'mobile':isMobile}">
+                                <div class="content-body">
+                                    <span *ngIf="comment.mention_id" class="mention-col">
+                                        @{{comment.UserProfilesOfMention.nickname }}
+                                    </span>
+                                    <span [innerHTML]="comment.content">
+
+                                    </span>
+                                </div>
+                                <div class="comment-tools" [ngClass]="{'mobile':isMobile}">
+                                    <small *ngIf="isAdmin || comment.user_id == userId " class="tool" (click)="deleteComment(comment)">
+                                        삭제
+                                    </small>
+                                    <small *ngIf="isAdmin || comment.user_id == userId">
+                                        |
+                                    </small>
+                                    <small *ngIf="comment.user_id != userId" class="tool" (click)="reportComment(comment.id)">
+                                        신고
+                                    </small>
+                                    <small *ngIf="comment.user_id == userId" class="tool" (click)="updateComment(comment)">
+                                        수정
+                                    </small>
+                                    <small>
+                                        |
+                                    </small>
+                                    <small class="tool" (click)="appendcommentForm(comment)">
+                                        {{ comment.parent ? '언급' : '대댓글'}}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-dataView>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+
+    <app-cta-facebook-like>
+    </app-cta-facebook-like>
+
+    <div id="commentForm">
+        <!-- <div style="margin-top:15px; margin-left:18px;">
+            <p-checkbox [(ngModel)]="isCommentAnonymous" label="익명 댓글" binary="true"></p-checkbox>
+        </div> -->
+        <div class="comment-input-form" style="margin: 18px 0px 0px 18px">
+            <textarea autoResize="true" maxlength="1999" #commentFormRef pInputTextarea [placeholder]=" comentFormTarget?.isUpdate ? ''  : ('@'+ (comentFormTarget ? comentFormTarget?.UserProfile?.nickname : '')) "></textarea>
+            <div class="btn-wrapper">
+                <button *ngIf="!comentFormTarget.isUpdate " (click)="commentToComment(commentFormRef)" pButton type="button"
+                    class="ui-button-info comment-register-btn" label="등록">
+                </button>
+                <button *ngIf="comentFormTarget.isUpdate && !isMobile " (click)="cancelUpdateComment()" pButton type="button"
+                    style="margin-right :7px;" class="ui-button-info comment-update-cancel-btn " label="취소">
+                </button>
+                <button *ngIf="comentFormTarget.isUpdate " (click)="registerUpdateComment(commentFormRef)" pButton type="button"
+                    class="ui-button-info comment-update-btn" label="수정">
+                </button>
+                <!-- <button (click)="registComment(userCommentForm,'emphathy')" pButton type="button" class="ui-button-secondary comment-register-empathy-btn "
+                    label="등록+공감">
+                </button> -->
+            </div>
+        </div>
+    </div>
+
+    <p-confirmDialog key="delete" header="댓글 삭제" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <p-confirmDialog key="report" header="댓글 신고" icon="pi pi-exclamation-triangle"></p-confirmDialog>

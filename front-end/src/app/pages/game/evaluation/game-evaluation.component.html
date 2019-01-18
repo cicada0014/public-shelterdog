@@ -1,0 +1,126 @@
+<div style="display: inline-flex ; width: 100% ; justify-content: center">
+    <div style="max-width : 1000px;">
+
+        <div style="display:inline-flex; width: 100% ;justify-content: space-between">
+
+            <div class="injected-text">
+                {{injectedText}} &nbsp;
+            </div>
+
+
+            <div style="margin : 20px ">
+                <div class="about-text" (click)="goToAbout()">
+                    이 사이트는 뭐하는 곳인가요?
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <app-refuge-list [isSmallFont]="true" [customText]="'여기에 싫어하는 것이 있나요?'"></app-refuge-list>
+
+        <!-- <div class="article-share-tool">
+            <a id="kakao-link-btn">
+                <img src="../../../../assets/brands/kakaolink_btn_small.png" alt="카톡으로 공유하기">
+                <span>
+                    공유하기
+                </span>
+            </a>
+        </div> -->
+        <div *ngIf="!isMobile" style="width:100%; display:inline-flex ; justify-content: center">
+            <!-- 일반 데탑 테블릿 가로배너 -->
+            <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-2127030706496959"
+                data-ad-slot="7065238125"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div *ngIf="isMobile" style="margin: 15px 0px;  width:100%; display:inline-flex ; justify-content: center">
+            <!-- 가로 모바일 배너 -->
+            <ins class="adsbygoogle" style="display:inline-block;width:320px;height:100px" data-ad-client="ca-pub-2127030706496959"
+                data-ad-slot="6220110065"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <hr style="border-color : #eee">
+
+        <div class="comment-area-header" style="margin-top:30px;">
+            게임 평가 및 피드백
+
+        </div>
+
+        <div style="padding: 15px 10px;">
+            <div class="ui-inputgroup" style="width:100%">
+                <!-- <span style="font-size:12px; margin-right:10px; margin-bottom: 10px; line-height: 2 ; ">
+                        닉네임 :
+                    </span> -->
+                <input style="height:25px; width:200px; border : solid 1px #999; border-radius: 3px; " maxlength="10"
+                    type="text" pInputText [(ngModel)]="nicknameValue" placeholder="닉네임">
+            </div>
+            <div class="comment-input-form">
+                <textarea autoResize="true" maxlength="199" #gameEvaluationForm pInputTextarea [placeholder]="placeholder"></textarea>
+                <div class="btn-wrapper">
+                    <button (click)="registEvaluation(gameEvaluationForm)" pButton type="button" class="ui-button-info comment-register-btn"
+                        label="등록">
+                    </button>
+                    <!-- <button (click)="registComment(userCommentForm,'emphathy')" pButton type="button" class="ui-button-secondary comment-register-empathy-btn "
+                            label="등록+공감">
+                        </button> -->
+                </div>
+            </div>
+        </div>
+
+
+        <p-dataView class="game-evaluation-list" [value]="items" [style]="{'margin-bottom':'20px'}" emptyMessage="아직 평가가 없습니다.">
+            <ng-template let-item pTemplate="listItem">
+                <div class="comment-wrapper">
+                    <div class="comment-header">
+                        <div class="comment-author">
+                            {{item.nickname}} ({{convertIp(item.ip)}})
+                        </div>
+                        <div class="comment-created-at">
+                            <!-- {{convertTime(comment.created_at)}} -->
+                        </div>
+                    </div>
+                    <div class="comment-content" [ngClass]="{'mobile':isMobile}">
+                        <div class="content-body">
+                            <!-- <span *ngIf="comment.mention_id" class="mention-col">
+                                @{{comment.UserProfilesOfMention.nickname }}
+                            </span> -->
+                            <span [innerHTML]="item.content">
+
+                            </span>
+                        </div>
+                        <!-- <div *ngIf="!isLoggedIn" class="content-body" [innerHTML]="'로그인을 해야 볼 수 있습니다. ㅎ'">
+                        </div> -->
+                        <!-- <div class="comment-tools" [ngClass]="{'mobile':isMobile}">
+                            <small *ngIf="item.isAdmin || comment.user_id == userId " class="tool" (click)="deleteComment(comment)">
+                                삭제
+                            </small>
+                            <small *ngIf="item.isAdmin || comment.user_id == userId">
+                                |
+                            </small>
+                            <small *ngIf="comment.user_id != userId" class="tool" (click)="reportComment(comment.id)">
+                                신고
+                            </small>
+                            <small *ngIf="comment.user_id == userId" class="tool" (click)="updateComment(comment)">
+                                수정
+                            </small>
+                            <small *ngIf="comment.user_id != userId">
+                                |
+                            </small>
+                            <small class="tool" (click)="appendcommentForm(comment)" *ngIf="comment.user_id != userId">
+                                {{ comment.parent ? '언급' : '대댓글'}}
+                            </small>
+                        </div> -->
+                    </div>
+                </div>
+            </ng-template>
+        </p-dataView>
+    </div>
+</div>

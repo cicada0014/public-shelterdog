@@ -1,0 +1,25 @@
+<div id="gnb-position-guide" [ngStyle]="{ 'width':guideWidth+'px',  'transform': 'translateX('+ (guideXPos - 5) +'px)'}"
+    [ngClass]="{'not-ready':!guideDisplay}">
+    &nbsp;
+</div>
+<div id="gnb-position-cunnectBar" [ngStyle]="{ 'width': connectBarWidth +'px',  'transform': 'translateX('+ (connectBarXPos ) +'px)'}"
+    [ngClass]="{'not-ready':!connectBarDisplay}">
+    &nbsp;
+</div>
+<div class="mobile-gnb-tabs">
+    <div class="gnb-tab-item" *ngFor="let tab of mobileGNBTabs" [ngClass]="{'activated':tab.active}" [id]="tab.label +'-nav'">
+        <div class="tab-text " (click)="activateTab(tab)">
+            <div style="width:70px">
+                {{tab.label}}
+                <i *ngIf="tab.down" class="fas fa-caret-down"></i>
+                <div *ngIf="tab.new" style="position:fixed">
+                    <img style="top:-33px; left: 5px ;position : relative" width="18" src="../../../assets/imgs/new-badge.png"
+                        alt="new">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <p-tabMenu [model]="mobileGNBTabs"></p-tabMenu> -->

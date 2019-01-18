@@ -1,0 +1,102 @@
+@import '../../global-theme.scss';
+
+
+
+:host{
+    section{
+        margin-top: 70px;
+        &.mobile{
+            margin-top: 80px;
+        }
+        &.full-screen{
+            margin-top: 0px !important;
+        };
+        width:100%;
+        margin-right: 0px;
+        margin-left:0px;
+        min-height:60vh
+    }
+
+
+    #content-body{
+        // padding: 0 10px 15px 10px;
+        margin-top: 6px;
+        &.full-screen{
+            padding: 0 !important ; 
+            margin:0 !important;
+        }
+        background: #fff;
+        width: 100%;
+        max-width: 1050px;
+        &.mobile{
+            border-left: none;
+            border-right: none;
+        }
+        border-left: 10px solid $global-bg-color;
+        border-right: 10px solid $global-bg-color;
+    }
+
+
+
+    app-left-side{
+        display: inline-flex;
+        justify-content: center;
+        @media screen and (max-width: 992px){
+            display: none !important;
+        }
+    }
+    app-right-side{
+        display: inline-flex;
+        justify-content: center;
+        @media screen and (max-width: 992px){
+            display: none !important;
+        }
+    }
+
+
+    .for-gnb-list{
+        position:fixed ; 
+        top:79px;
+        width:100%;
+        background:  $global-bg-color;
+        border-bottom: 1px solid #aaa;
+        &.no-display{
+            height: 0px;
+            border-bottom: none;
+            };
+        .gnb-item-wrapper{
+            transition: .3s;
+            display:inline-flex;
+            width:100%;
+            &.justify-start{
+                justify-content: flex-start;
+
+            }
+            &.justify-end{
+                .gnb-item{
+                padding: 10px 15px;
+                width: 30%;
+                font-size: 13px;
+                text-align : right;
+                word-break : keep-all;
+            }
+                justify-content: flex-end;
+            }
+            flex-wrap: wrap;
+            align-items: center;
+            height: 100%;
+            &.no-display{
+                transition: .3s;
+                height: 0px;
+                color : $global-bg-color;
+            }
+            .gnb-item{
+                padding: 10px 5px;
+                width: 20%;
+                font-size: 13px;
+            }
+        }
+
+        // gnb-item
+    }
+}

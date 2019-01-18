@@ -1,0 +1,156 @@
+<div class="game-description">
+
+    <div class="game-title">
+        <span>
+            사이다 톡
+        </span>
+        <img width="40px" src="../../../../assets/icons/shelterdog-icon-72.png" alt="">
+    </div>
+    <div class="des-text">
+        <span *ngIf="!isMobile">
+            변덕쟁이 상사, 배신 때리는 친구, 갑질왕 거래처 직원 등 암덩어리들에게
+            <br>
+
+        </span>
+        <span>
+            하고싶었던 말들이나 욕을 속
+            <span style="color : skyblue ; font-size : 17px;">시원하게</span>
+            해보세요!
+        </span>
+        <span *ngIf="!isMobile">
+            김부장! 니가 하라매!!!!!
+        </span>
+    </div>
+</div>
+
+
+<div class="game-template">
+
+    <div class="game-display">
+        <div class="chatroom-header">
+            <span class="opponent-name" *ngIf="isReady" style="margin-left : 15px;">
+                {{opponent.name}}
+            </span>
+        </div>
+        <div id="chatroom">
+            <div class="today-text-col">
+                <hr>
+                <span class="today-text">
+                    {{todayText}}
+                </span>
+                <hr>
+            </div>
+
+            <div *ngFor="let msg of msgs ; let i = index">
+                <div [ngClass]="{'me': msg.who =='me' ,'opp':msg.who !='me' ,'sequence' : (msgs[i+1] ?   msgs[i].who == msgs[i+1].who : false )  }">
+                    <div class="time-text">
+                        <div class="read-number" *ngIf="!msg.isRead ">
+                            1
+                        </div>
+                        <div *ngIf=" (msgs[i+1] ?  msgs[i].time != msgs[i+1].time    : true ) || (msgs[i+1] ? msgs[i].who != msgs[i+1].who : true ) ">
+                            {{msg.time}}
+                        </div>
+                    </div>
+                    <div>
+                        <div *ngIf="msg.who !='me' && (msgs[i-1] ?   msgs[i].who != msgs[i-1].who : true ) " class="msg-oppoent-name">
+                            {{opponent.name}}
+                        </div>
+                        <div class="arrow_box" [ngClass]="{'no-arrow': !(msgs[i-1] ?   msgs[i].who != msgs[i-1].who : true )}">
+                            <div>
+                                {{msg.text}}
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="msg.who !='me'   ">
+                        <div *ngIf="!(msgs[i-1] ? msgs[i].who != msgs[i-1].who : true )  " style="width :45px;">
+                            &nbsp;
+                        </div>
+                        <img *ngIf="(msgs[i-1] ?   msgs[i].who != msgs[i-1].who : true ) " style="border-radius:50%; margin-left :5px;"
+                            width="40px" src="../../../../assets/imgs/kakao_profile_default.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-form" *ngIf="!isMsgTimeout">
+            <textarea (touchmove)="preventFoucesing()" (touchstart)="preventFoucesing()" *ngIf="!isDone" [(ngModel)]="text"
+                [placeholder]="isReady ? placeholder : ''" (keydown)="sendMsg($event)"></textarea>
+            <div *ngIf="isDone" class="done-box">
+                <h4 style="margin:0">
+                    - 대화가 끝났습니다 -
+                </h4>
+                <button (click)="retry()">다시하기</button>
+            </div>
+            <div class="send-btn">
+                <button (click)="sendMsg($event)">전송</button>
+            </div>
+        </div>
+        <div class="chat-form" *ngIf="isMsgTimeout">
+            <div class="done-box">
+                <h4 style="margin:0; text-align: left;">
+                    상대방이 입력 중 입니다{{watingBubble}}
+                </h4>
+            </div>
+            <div class="send-btn">
+                <button>전송</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!isReady" class="game-display-overlay">
+    </div>
+    <div *ngIf="!isReady && step == 0 " class="game-display-overlay-form">
+        <h3>
+            대상을 고른후 이름을 입력하세요.
+        </h3>
+        <div style="margin-bottom:30px">
+            <p-radioButton name="groupname" value="boss" label="상사" [(ngModel)]="opponent.type"></p-radioButton>
+            <p-radioButton [style]="{'margin-left':'18px'}" name="groupname" value="friend" label="친구" [(ngModel)]="opponent.type"></p-radioButton>
+            <p-radioButton [style]="{'margin-left':'18px'}" name="groupname" value="etc" label="기타" [(ngModel)]="opponent.type"></p-radioButton>
+        </div>
+        <div style="width:100%; display:inline-flex; justify-content:space-between; margin-bottom: 30px ; align-items: center;">
+            <div>
+                이름 :
+            </div>
+            <div class="ui-inputgroup" style="width:80%">
+                <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                <input type="text" pInputText [(ngModel)]="opponent.name" placeholder="상대방 이름">
+            </div>
+        </div>
+        <div style="width:100%; display:inline-flex ; justify-content:flex-end">
+            <button (click)="startGame()" pButton type="button" label="시작하기"></button>
+        </div>
+    </div>
+    <div *ngIf="!isReady && step == 1 " class="game-display-overlay-form">
+        <h3>
+            {{oppCase == 'apology' ? '상대방이 사과를 해옵니다' : '상대방이 욕을 합니다' }}
+        </h3>
+        <div style="width:100%; display:flex ; flex-direction: column; align-items: center; justify-content:center">
+            <button (click)="choiceEvent('ignore')" class="ui-button-secondary" style="margin-bottom:10px;" pButton
+                type="button" label="1.읽씹한다"></button>
+            <button (click)="choiceEvent('response')" class="ui-button-secondary" pButton type="button" label="2.메세지로 대응"></button>
+        </div>
+    </div>
+    <div *ngIf="!isReady && step == 2 " class="game-display-overlay-form">
+        <!-- <h3>
+            {{oppCase == 'apology' ? '상대방이 사과를 해옵니다' : '상대방이 욕을 합니다' }}
+        </h3> -->
+        <div>
+            &nbsp;
+        </div>
+        <div style="width:100%; display:flex ; flex-direction: column; align-items: center; justify-content:center;">
+            <button (click)="choiceEvent('fuck')" class="ui-button-secondary" style="margin-bottom:10px;" pButton type="button"
+                label="1.욕을 한다"></button>
+            <button (click)="choiceEvent('tolerance')" class="ui-button-secondary" pButton type="button" label="2.관용을 베푼다"></button>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+<app-game-evaluation [game_id]="game_id" [game_title]="'사이다 톡'" [game_image]="'https://s3.ap-northeast-2.amazonaws.com/article.images/3e/6a/bc/be/0c/83/f5/09/37/51/8c/24/c9/4a/a0/6b/KakaoTalk_Photo_2018-10-24-18-27-05.jpeg'"
+    [game_description]="'하고싶었던 말을 속 시원하게 해보세요!'" [placeholder]="'속 시원 했나요? 개선할 사항이 있다면 알려주세요!'"    ></app-game-evaluation>
+
+<p-toast></p-toast>

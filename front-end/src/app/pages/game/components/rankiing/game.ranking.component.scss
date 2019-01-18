@@ -1,0 +1,218 @@
+
+
+.left-content-row{
+    width  : 100% ; 
+    display:inline-flex;
+    @media screen and (max-width: 767px){
+        border-right: none ; 
+    }
+    @media screen and (min-width: 768px){
+        border-right: 1px solid; 
+    }
+
+}
+.left-p{
+
+    @media screen and (max-width: 767px){
+        border-right: none ; 
+    }
+    @media screen and (min-width: 768px){
+        // border-right: 1px solid; 
+    }
+
+    
+}
+
+
+.mobile-rankers{
+    font-size: 12px;
+    // display :none !important;
+    // @media screen and (min-width: 768px){
+    //     display :none !important;
+    // }
+}
+// .wide-rankers{
+//     // @media screen and (max-width: 767px){
+//     //     display :none !important;
+//     // }
+// }
+
+.rankers-wrapper{
+    @media screen and (max-width: 767px){
+        width: 100% !important;
+    }
+    @media screen and (min-width: 768px){
+        width: 20% !important;
+    }
+}
+
+
+.common-rankers-row{
+    display: inline-flex;
+    align-items: center;
+    @media screen and (max-width: 767px){
+        width: 100% !important;
+        display:inline-flex;
+    }
+    @media screen and (min-width: 768px){
+        width: 20% !important;
+    }
+    img{
+        margin-left: 3px;
+        // @media screen and (max-width: 767px){
+        //     width: 100% !important;
+        //     display:inline-flex;
+        // }
+        @media screen and (min-width: 768px){
+            display: none;
+        }
+    }
+    padding:5px ;
+    font-size:12px;
+
+}
+.commom-rankers-thumbnail{
+    @media screen and (max-width: 767px){
+        display:none !important;
+    }
+}
+
+.more-rankers{
+    color:#007ad9 ;
+    margin-top : 15px;
+    font-size : 12px;
+    padding-left : 15px;    
+    cursor: pointer;
+    &:hover{
+        color : darken($color: #007ad9, $amount: 15);
+    }
+}
+
+
+
+
+.rankers-paragraph{
+
+    @media screen and (max-width: 767px){
+        display:flex;
+        flex-direction: column;
+        .right-header{
+            display: none !important ;
+        }
+    }
+    @media screen and (min-width: 768px){
+        display:inline-flex ; 
+    }
+    
+    width:100% 
+
+
+}
+
+.rank-col{
+    width: 20% ;
+    text-align: center;
+    padding: 3px;
+    line-height: 2;
+    &.col-content{
+        line-height: 1.4;
+        font-size: 15px;
+        font-weight: 700;
+    }
+    &.trophy{
+        color :red;
+        &.ceo:before {
+            background-image: url( "../../../../../assets/game/common/1-trophy.png" );
+            background-size: 12px 12px;
+            background-repeat: no-repeat;
+            width:12px;
+            height:12px;
+            color: transparent;
+            content: "1.5";
+            position: absolute;
+            left: 20px;
+        
+          }
+          
+    }
+    &.gold  {
+        color: #ffd700;
+        &.ceo:before {
+            background-image: url( "../../../../../assets/game/common/gold-medal.png" );
+            background-size: 12px 12px;
+            background-repeat: no-repeat;
+            width:12px;
+            height:12px;
+            color: transparent;
+            content: "1.5";
+            position: absolute;
+            left: 20px;
+        
+          }
+    }
+    &.silver{
+        color: #c0c0c0;
+        &.ceo:before {
+            background-image: url( "../../../../../assets/game/common/silver-medal.png ");
+            background-size: 12px 12px;
+            background-repeat: no-repeat;
+            width:12px;
+            height:12px;
+            color: transparent;
+            content: "1.5";
+            position: absolute;
+            left: 20px;
+        
+          }
+    }
+    &.cu{
+        color: #823F36;
+        &.ceo:before {
+            background-image: url( "../../../../../assets/game/common/cu-medal.png" );
+            background-size: 12px 12px;
+            background-repeat: no-repeat;
+            width:12px;
+            height:12px;
+            color: transparent;
+            content: "1.5";
+            position: absolute;
+            left: 20px;
+
+            @media screen and (max-width: 767px){
+                left: 20px;
+            }
+            @media screen and (min-width: 768px){
+                left: 47.5vw;
+            }
+        
+          }
+    }
+
+
+
+}
+.nickname-col{
+    width: 40% ;
+    text-align: center;
+    padding: 3px;
+    line-height: 2;
+}
+.life-col{
+    width: 20% ;
+    text-align: center;
+    padding: 3px;
+    line-height: 2;
+}
+.deposit-col{
+    width: 20% ;
+    text-align: center;
+    padding: 3px;
+    line-height: 2;
+}
+
+.rank-info{
+    line-height: 1.5;
+    font-size: 15px;
+    
+
+}

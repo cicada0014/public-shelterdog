@@ -1,0 +1,26 @@
+<div class="p-grid p-justify-between p-align-center detail-header ">
+    <div class="p-col header-title">
+        공지사항
+    </div>
+</div>
+
+
+
+
+<div class="content-wrapper">
+    <div class="content-title">
+        <span style="font-size : 1.1rem;">
+            {{item.title}}
+        </span>
+        <span style="font-size: 12px">
+            {{convertTime(item.created_at)}}
+        </span>
+    </div>
+
+    <div class="content-body" style="background :white ; width:100% ; " markdown [data]="item.content"></div>
+
+
+    <div class="content-footer" style="text-align: right">
+        <button pButton type="button" label="목록으로" (click)="goToList()"  ></button>
+    </div>
+</div>

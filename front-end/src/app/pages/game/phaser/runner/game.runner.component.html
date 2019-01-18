@@ -1,0 +1,10 @@
+<div id="game-display" style=" ">
+</div>
+<!-- <div style="padding:15px">
+    지금까지 {{endingCount}}명이 클리어 했습니다.
+    <br>
+    <small>(엔딩 스토리까지 다 봐야 집계) </small>
+</div> -->
+
+<app-game-evaluation [game_id]="2" [game_title]="'죄수번호 5275'" [game_image]="'https://s3.ap-northeast-2.amazonaws.com/article.images/01/70/17/d1/4c/d4/66/71/a5/10/31/60/84/f7/27/37/k-vs-villain.jpeg'"
+    [injected_text]="'지금까지 '+ endingCount+'명이 클리어 했습니다.'" [game_description]="'세상의 편견에 맞서는 한 청년의 이야기'" [placeholder]="'간단한 소감 및 개선점 부탁드려요!'"></app-game-evaluation>

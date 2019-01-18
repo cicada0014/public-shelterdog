@@ -1,0 +1,38 @@
+:host{
+    .detail-header{
+        margin:  0 !important;
+        background: white ;
+        // border-bottom: 1.5px solid #eee !important;
+        .header-title{
+            // &:hover{
+            //     opacity: 0.8;
+            // }
+            // cursor: pointer;
+            font-size: 1.2rem;
+            padding: 20px;
+        }
+    }
+
+    .list-wrapper{
+        height: 70vh;
+        overflow-y: scroll;
+        // text-align: center;
+        padding: 15px;
+        background: white ;
+        .notice-title{
+            display: inline-flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            line-height: 1.3;
+            padding: 10px;
+            border-bottom: .5px solid #eee;
+            cursor: pointer;
+            transition: .3s;
+            &:hover{
+                background: darken($color: white, $amount: 25);
+                font-weight: bold;
+            }
+        }
+    }
+}

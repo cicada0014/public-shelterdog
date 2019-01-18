@@ -1,0 +1,33 @@
+<p-panel header="인기 도피처">
+    <div class="popluar-refuge-wrapper p-grid">
+        <div [ngClass]=" { 'p-col-6': !isMobile , 'p-col-12':isMobile} " class="popular-refuge p-col-6" *ngFor="let item of items">
+            <div class="popular-refuge-title" (click)="goToRefuge(item)">
+                <span [ngStyle]="{'color': getRefugeTitleColor(item)}" style="margin-right:3px;font-weight: 500; ">
+                    {{item.refuge_name}}
+                </span>
+                <span style="font-weight: 300;">
+                    도피처
+                </span>
+
+            </div>
+
+            <div *ngFor="let article of item.articles">
+                <div (click)="goToArticle(article)" class="popular-refuge-article">
+                    <span class="article-title">
+                        <a [href]="'/refuge-article/'+article.id"></a>
+                        {{article.title}}
+                        <small style="margin-right:7px;" class="article-comment-count">
+                            ({{article.comment_count? article.comment_count : 0}})
+                        </small>
+                        <small *ngIf="article.thumbnail">
+                            <i style="margin-top:5px ;" class="fas fa-image has-article-image-icon"></i>
+                        </small>
+                    </span>
+                </div>
+            </div>
+            <div *ngIf="item.articles.length ==0" class="popular-refuge-no-info">
+                글이 없습니다.
+            </div>
+        </div>
+    </div>
+</p-panel>

@@ -1,0 +1,46 @@
+<div class="this-header" style="font-weight: 500">
+    "ᄋᄋᄋ을 싫어하겠습니다"
+</div>
+<div class="this-description" style="font-weight: 300;color:#aaa">
+    싫어하는 것을 자유롭게 이야기하는 라디오
+</div>
+
+
+<div *ngIf="selectedItem" class="podcast-yt">
+    <!-- <div>
+        {{selectedItem.title}}
+    </div> -->
+    <div class="yt-display" [innerHTML]="selectedItem.link" [ngClass]="{'mobile':isMobile}">
+    </div>
+</div>
+
+
+<div class="podcast-list-wrapper">
+    <div class="podcast-list list-header">
+        <div class="title">
+            회차
+        </div>
+        <div class="description">
+            제목
+        </div>
+        <div class="created-at">
+            날짜
+        </div>
+    </div>
+    <div class="search-results" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="1000"
+        (scrolled)="onScrollDown($event)" [infiniteScrollUpDistance]="0.1">
+        <div class="podcast-list" *ngFor="let item of items ; " (click)="playPodcast(item)" [ngClass]="{'selected': selectedItem.id == item.id}">
+            <div class="title">
+                {{item.title}}
+            </div>
+            <div class="description">
+                {{item.description}}
+            </div>
+            <div class="created-at">
+                {{convertTime(item.created_at)}}
+            </div>
+        </div>
+    </div>
+    <!-- <p-progressSpinner *ngIf="progressDisplay" [style]="{'width':'30px'}"></p-progressSpinner> -->
+
+</div>

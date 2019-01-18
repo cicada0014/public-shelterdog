@@ -1,0 +1,53 @@
+<div class="p-grid p-justify-between p-align-center detail-header " [ngClass]="{mobiled : isMobile}">
+    <div class="p-col-9 refuge-name">
+        <div class="name-row">
+            <span class="refuge-default-name">
+                <span>
+                    쉘터독
+                </span>
+                <span style="color : orange ; ">
+                    오락실
+                </span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div style="margin-left : 20px;">
+    <div class="game-tab-description">
+        <div style="   padding-left: 15px;font-weight: 200; font-size: 17px;">
+            간단한 게임을 통해서 짜증을 없애봐요.
+            <br>
+            쉘터독만의 게임들을 즐겨보세요.
+            <br>
+        </div>
+    </div>
+
+
+    <div class="game-list" [ngClass]="{'isMobile': isMobile}">
+
+        <div class="game-item" *ngFor="let item of items" (click)="goToItem(item)">
+            <p-card [title]="item.krtitle" [style]="{width: '200px' }" styleClass="ui-card-shadow">
+                <p-header>
+                    <img style="width: 100% ;" [src]="item.img">
+                    <img *ngIf="item.new" style="width: 35px; position: relative;top: 25px;" src="../../../assets/imgs/new-badge.png"
+                        alt="">
+                </p-header>
+                <div>
+
+                </div>
+                <div>
+                    {{item.description}}
+
+                </div>
+                <!-- <p-footer>
+                    <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
+                    <button pButton type="button" label="Cancel" icon="pi pi-times" class="ui-button-secondary"></button>
+                </p-footer> -->
+            </p-card>
+        </div>
+
+
+    </div>
+
+</div>

@@ -1,0 +1,33 @@
+:host{
+    p-panel{
+        // margin:1rem;
+        .popluar-refuge-wrapper{
+            padding: 5px;
+            .popular-refuge-title{
+                font-size: 1rem;
+                margin-bottom: 5px;
+                cursor: pointer;
+                transition: .15s;
+                &:hover{
+                    font-weight: bold;
+                }
+            }   
+            .popular-refuge-article{
+                padding: 10px 0px 5px 0px ;
+                border-bottom: 1px dashed #ccc ;
+                cursor: pointer;
+                .article-title{
+                    padding-left: 5px;
+                }
+                &:hover{
+                    font-weight: 600;
+                    text-decoration: underline;
+                }
+            }
+            .popular-refuge-no-info{
+                padding: 10px 0px 5px 0px ;
+                // border-bottom: 1px dashed #ccc ;
+            }
+        }
+    }
+}

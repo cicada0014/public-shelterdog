@@ -1,0 +1,363 @@
+<div class="vertical-display" *ngIf="isMobile && isVertical">
+    <div class="display-meesage">
+        <div style="display:inline-flex ; width:100%; justify-content: center">
+            <img style="max-width: 200px;" src="../../../../../assets/game/common/orientation-guide.png" alt="기기를 가로로 돌려주세요.">
+        </div>
+        <div>
+            가로로 돌려주세요
+        </div>
+    </div>
+</div>
+
+
+<div id="game-display"></div>
+
+
+
+
+
+
+
+
+
+
+<div *ngIf="isAdmin">
+
+    <h4>
+        주의! 값이 저장되지 않기때문에 새로고침 조심하세요. 따로 메모해두세요.
+    </h4>
+
+
+
+
+    <h3>
+        {{isWaving ? '웨이브가 진행중입니다.' : '웨이브를 다시 시작하세요'}}
+    </h3>
+
+
+    <div>
+        <input type="checkbox" [(ngModel)]="stageScene.turretRestrictionsOfWave.basic"> 일반 불가 <br>
+        <input type="checkbox" [(ngModel)]="stageScene.turretRestrictionsOfWave.quick"> 속사 불가 <br>
+        <input type="checkbox" [(ngModel)]="stageScene.turretRestrictionsOfWave.long_distance"> 장거리 불가 <br>
+        <input type="checkbox" [(ngModel)]="stageScene.turretRestrictionsOfWave.slow_debuff"> 슬로우 불가 <br>
+    </div>
+
+    <br>
+
+    <input #waveStepNumberInput type="number"> <br>
+    <button (click)="setWaveStep(waveStepNumberInput) ">현재 웨이브를 해당 값으로 조정 </button>
+
+    <br>
+    <input type="checkbox" [(ngModel)]="stageScene.customAdmin"> 이 값이 체크되면 기존 웨이브가 아닌 아래 세팅된 빌런이 등장 <br>
+    <br>
+
+    <div>
+        웨이브 세팅
+    </div>
+
+    <div *ngFor="let wave of stageScene.waveLeft ; let i  = index" style="display:flex ; flex-direction: column">
+        <div style="margin-bottom: 20px;">
+            왼쪽 wave {{i+1}}
+            <div style="display:flex ; flex-direction: column">
+                <div style="display:inline-flex">
+                    빌런 1 :
+                    <div>
+                        <input #type1Input type="number">
+                        <button (click)="addEnemy(wave.type1, type1Input.value) "> 한마리 넣기</button>
+                        <button (click)="wave.type1.pop()">빼기 </button>
+                    </div>
+                    <div *ngFor="let enemy1 of wave.type1" style="margin-right: 5px;">
+                        {{enemy1}} //
+                    </div>
+                </div>
+                <div style="display:inline-flex">
+                    빌런 2
+                    <div>
+                        <input #type2Input type="number">
+                        <button (click)="addEnemy(wave.type2, type2Input.value) "> 한마리 넣기</button>
+                        <button (click)="wave.type2.pop()">빼기 </button>
+                    </div>
+                    <div *ngFor="let enemy2 of wave.type2" style="margin-right: 5px;">
+                        {{enemy2}}
+                    </div>
+                </div>
+                <div style="display:inline-flex">
+                    빌런 3
+                    <div>
+                        <input #type3Input type="number">
+                        <button (click)="addEnemy(wave.type3, type3Input.value) "> 한마리 넣기</button>
+                        <button (click)="wave.type3.pop()">빼기 </button>
+                    </div>
+                    <div *ngFor="let enemy3 of wave.type3" style="margin-right: 5px;">
+                        {{enemy3}}
+                    </div>
+                </div>
+                <div style="display:inline-flex">
+                    빌런 4
+                    <div>
+                        <input #type4Input type="number">
+                        <button (click)="addEnemy(wave.type4, type4Input.value) "> 한마리 넣기</button>
+                        <button (click)="wave.type4.pop()">빼기 </button>
+                    </div>
+                    <div *ngFor="let enemy4 of wave.type4" style="margin-right: 5px;">
+                        {{enemy4}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <div *ngFor="let wave of stageScene.waveRight ; let i  = index" style="display:flex ; flex-direction: column">
+        <div style="margin-bottom: 20px;">
+            오른쪽 wave {{i+1}}
+            <div style="display:flex ; flex-direction: column">
+                <div style="display:inline-flex">
+                    빌런 1 :
+                    <div>
+                        <input #type1rInput type="number">
+                        <button (click)="addEnemy(wave.type1, type1rInput.value) "> 한마리 넣기</button>
+                        <button (click)="wave.type1.pop()">빼기 </button>
+                    </div>
+                    <div *ngFor="let enemy1 of wave.type1" style="margin-right: 5px;">
+                        {{enemy1}} //
+                    </div>
+                </div>
+                <div style="display:inline-flex">
+                    빌런 2
+                    <div>
+                        <input #type2rInput type="number">
+                        <button (click)="addEnemy(wave.type2, type2rInput.value) "> 한마리 넣기</button>
+                        <button (click)="wave.type2.pop()">빼기 </button>
+                    </div>
+                    <div *ngFor="let enemy2 of wave.type2" style="margin-right: 5px;">
+                        {{enemy2}}
+                    </div>
+                </div>
+                <div style="display:inline-flex">
+                    빌런 3
+                    <div>
+                        <input #type3rInput type="number">
+                        <button (click)="addEnemy(wave.type3, type3rInput.value) "> 한마리 넣기</button>
+                        <button (click)="wave.type3.pop()">빼기 </button>
+                    </div>
+                    <div *ngFor="let enemy3 of wave.type3" style="margin-right: 5px;">
+                        {{enemy3}}
+                    </div>
+                </div>
+                <div style="display:inline-flex">
+                    빌런 4
+                    <div>
+                        <input #type4rInput type="number">
+                        <button (click)="addEnemy(wave.type4, type4rInput.value) "> 한마리 넣기</button>
+                        <button (click)="wave.type4.pop()">빼기 </button>
+                    </div>
+                    <div *ngFor="let enemy4 of wave.type4" style="margin-right: 5px;">
+                        {{enemy4}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div>
+        빌런 세팅
+    </div>
+
+    <div style="margin-bottom:20px">
+        <img src="../../../../../assets/game/defence/type1man.png" alt="">
+        <img src="../../../../../assets/game/defence/type1woman.png" alt="">
+        빌런 1
+        <span>
+            속도 : <input type="number" [(ngModel)]="type1ManEnemySpeed">
+        </span>
+        <span>
+            체력 : <input type="number" [(ngModel)]="type1ManEnemyHP">
+        </span>
+        <span>
+            보상금 : <input type="number" [(ngModel)]="type1ManEnemyReward">
+        </span>
+    </div>
+    <div style="margin-bottom:20px">
+        <img src="../../../../../assets/game/defence/type2man.png" alt="">
+        <img src="../../../../../assets/game/defence/type2woman.png" alt="">
+        빌런 2
+        <span>
+            속도 : <input type="number" [(ngModel)]="type2ManEnemySpeed">
+        </span>
+        <span>
+            체력 : <input type="number" [(ngModel)]="type2ManEnemyHP">
+        </span>
+        <span>
+            보상금 : <input type="number" [(ngModel)]="type2ManEnemyReward">
+        </span>
+    </div>
+    <div style="margin-bottom:20px">
+        <img src="../../../../../assets/game/defence/type3man.png" alt="">
+        <img src="../../../../../assets/game/defence/type3woman.png" alt="">
+        빌런 3
+        <span>
+            속도 : <input type="number" [(ngModel)]="type3ManEnemySpeed">
+        </span>
+        <span>
+            체력 : <input type="number" [(ngModel)]="type3ManEnemyHP">
+        </span>
+        <span>
+            보상금 : <input type="number" [(ngModel)]="type3ManEnemyReward">
+        </span>
+    </div>
+    <div style="margin-bottom:20px">
+        <img src="../../../../../assets/game/defence/type4man.png" alt="">
+        <img src="../../../../../assets/game/defence/type4woman.png" alt="">
+        빌런 4
+        <span>
+            속도 : <input type="number" [(ngModel)]="type4ManEnemySpeed">
+        </span>
+        <span>
+            체력 : <input type="number" [(ngModel)]="type4ManEnemyHP">
+        </span>
+        <span>
+            보상금 : <input type="number" [(ngModel)]="type4ManEnemyReward">
+        </span>
+    </div>
+
+    <button (click)="settingEnemy()"> 빌런 세팅 적용</button>
+
+    <hr>
+
+
+
+    <h5>
+        선택된 타워의 초기값 설정
+    </h5>
+
+    <div *ngIf="selectedTurret">
+        현재 선택한 타워 정보
+        <br>
+        <img [src]="getType()" alt="">
+
+        <span>
+            사정거리 : <input type="number" [(ngModel)]="selectedTurret._hitRange">
+        </span>
+        <span>
+            연사력 : <input type="number" [(ngModel)]="selectedTurret._speedOfAttack">
+        </span>
+        <span>
+            데미지 : <input type="number" [(ngModel)]="selectedTurret._damage">
+        </span>
+        <span>
+            가격 : <input type="number" [(ngModel)]="selectedTurret._price">
+        </span>
+        //슬로 타워에서만 적용하세요
+        <span>
+            디버프 효과 : <input type="number" [(ngModel)]="selectedTurret.slowDebuffEfficacy">
+        </span>
+        <span>
+            디버프 시간 : <input type="number" [(ngModel)]="selectedTurret.slowDebuffDuration">
+        </span>
+
+    </div>
+
+
+
+
+    <h5>
+        초기값 설정 : 해당 타워의 초기값을 변경합니다.
+    </h5>
+
+    <div>
+        사정거리는 반지름이며 단위는 1칸입입니다. (ex 3.5 는 반지름 3.5칸 지름 7칸)
+        <br>
+        연사력은 | 공격대기 시간 = 100000ms / '연사력' | 에 들어가는 변수 값입니다. 연사력이 높을 수록 공격속도가 빨라집니다. (ex -> 연사력 100은 공격대기 시간이 1000ms 즉
+        1초마다
+        1번씩 쏘게 됨)
+        <br>
+        데미지는 해당 타워가 쏘는 총알의 데미지 값입니다.
+        <br>
+        가격은 해당 타워를 설치하기 위한 비용으로 되파는 비용은 현재 1/2 로 설정되어있습니다.
+
+
+
+    </div>
+
+    <div style="margin-bottom:20px">
+        <img src="../../../../../assets/game/defence/turret/tower1.png" alt="">
+        basic 타워
+        <span>
+            사정거리 : <input type="number" [(ngModel)]="basicHitRange">
+        </span>
+        <span>
+            연사력 : <input type="number" [(ngModel)]="basicShoot">
+        </span>
+        <span>
+            데미지 : <input type="number" [(ngModel)]="basicDamage">
+        </span>
+        <span>
+            가격 : <input type="number" [(ngModel)]="basicPrice">
+        </span>
+
+    </div>
+    <div style="margin-bottom:20px">
+        <img src="../../../../../assets/game/defence/turret/tower2.png" alt="">
+        quick 타워
+        <span>
+            사정거리 : <input type="number" [(ngModel)]="quickHitRange">
+        </span>
+        <span>
+            연사력 : <input type="number" [(ngModel)]="quickShoot">
+        </span>
+        <span>
+            데미지 : <input type="number" [(ngModel)]="quickDamage">
+        </span>
+        <span>
+            가격 : <input type="number" [(ngModel)]="quickPrice">
+        </span>
+    </div>
+    <div style="margin-bottom:20px">
+        <img src="../../../../../assets/game/defence/turret/tower3.png" alt="">
+        long 타워
+        <span>
+            사정거리 : <input type="number" [(ngModel)]="longHitRange">
+        </span>
+        <span>
+            연사력 : <input type="number" [(ngModel)]="longShoot">
+        </span>
+        <span>
+            데미지 : <input type="number" [(ngModel)]="longDamage">
+        </span>
+        <span>
+            가격 : <input type="number" [(ngModel)]="longPrice">
+        </span>
+    </div>
+    <div style="margin-bottom:20px">
+        <img src="../../../../../assets/game/defence/turret/tower4.png" alt="">
+        slow debuff 타워
+        <span>
+            사정거리 : <input type="number" [(ngModel)]="slowHitRange">
+        </span>
+        <span>
+            연사력 : <input type="number" [(ngModel)]="slowShoot">
+        </span>
+        <span>
+            데미지 : <input type="number" [(ngModel)]="slowDamage">
+        </span>
+        <span>
+            가격 : <input type="number" [(ngModel)]="slowPrice">
+        </span>
+        <span>
+            슬로우 디버프 (퍼센트로 해주세요 15%-> 15) : <input type="number" [(ngModel)]="slowEfficacy">
+        </span>
+        <span>
+            슬로우 적용시간 (ms) : <input type="number" [(ngModel)]="slowDuration">
+        </span>
+    </div>
+
+
+
+    <button (click)="setInit()"> 이 값으로 세팅</button>
+</div>

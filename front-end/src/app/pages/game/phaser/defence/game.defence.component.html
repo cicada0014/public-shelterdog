@@ -1,0 +1,17 @@
+<div style="display:inline-flex ; justify-content:center ; align-items:center ; width:100%">
+    <img width="90%" src="../../../../../assets/game/defence/index-image.png" alt="">
+</div>
+
+<div class="play-btn-wrapper" style="margin-top:15px;">
+    <button pButton (click)="playGame()" type="button" class="ui-button-info comment-register-btn" label="게임 플레이">
+    </button>
+</div>
+
+
+
+
+<app-game-ranking></app-game-ranking>
+
+
+<app-game-evaluation [game_id]="3" [game_title]="'비매너와의 전쟁 - 비호감 전성시대 (a.k.a 디펜스 게임)'" [game_image]="'https://s3.ap-northeast-2.amazonaws.com/article.images/af/64/c4/b5/5c/bd/f4/85/41/13/c6/3d/8b/e6/26/4d/defence-tumbnail.png'"
+    [game_description]="'비매너들이 몰려옵니다. 이들을 혼내 주세요!'" [placeholder]="'간단한 소감 한마디 부탁드려요!'"></app-game-evaluation>   

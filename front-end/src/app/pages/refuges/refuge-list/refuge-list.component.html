@@ -1,0 +1,45 @@
+<p-panel>
+    <p-header>
+        <div style="display:inline-flex; width:100%; justify-content:space-between">
+            <span class="ui-panel-title" [ngClass]="{'mobile':isMobile , 'small-font':isSmallFont}">
+                {{customText ? customText : '도피처 목록' }}
+                <small *ngIf="!customText"> - 어떤 것을 싫어하시나요? </small>
+            </span>
+            <!-- <span style="    margin-top: 2px;color: #fff;cursor:pointer" (click)="goPodcast()">더 보기</span> -->
+        </div>
+    </p-header>
+
+    <!-- <div class="p-grid refuge-list-wrapper">
+        <div class="p-col-3 refuge-list-box  " *ngFor="let category of categories">
+            <div class="category-title">
+                {{category.name}}
+            </div>
+            <div class="refuge-of-category">
+                <div class="refuge-list-item" *ngFor="let refuge of category.Refuges" (click)="goToRefuge(refuge)">
+                    <a [href]="'/refuge-detail/'+refuge.id"></a>
+                    {{refuge.name}}
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="simple-list">
+        <div class="simple-list-item" [ngClass]="{'mobile':isMobile , 'small-font':isSmallFont}" *ngFor="let item of items">
+            <a (click)="goToRefuge(item)" style="color:black">
+                {{item.name}}
+            </a>
+        </div>
+    </div>
+    <div class="request-area" [ngClass]="{'mobile':isMobile , 'small-font':isSmallFont}">
+        <div class="cta-wrapper">
+            <span class="cta" (click)="goRefugeRequest()">
+                싫어하는 것이 여기 없다면 요청해보세요!
+            </span>
+            <a [routerLink]="'/refuge-request'">
+                도피처 요청
+            </a>
+        </div>
+    </div>
+
+
+
+</p-panel>

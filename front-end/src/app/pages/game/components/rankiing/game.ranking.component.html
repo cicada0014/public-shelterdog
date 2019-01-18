@@ -1,0 +1,146 @@
+<p-panel>
+    <p-header>
+        랭킹
+    </p-header>
+
+
+
+
+    <div class="wide-rankers" style="display:inline-flex; flex-wrap:wrap ; width : 100% ; align-items: center; margin-bottom : 15px;">
+        <div *ngFor="let data of topRankers; let i = index" class="rankers-wrapper">
+            <p-card *ngIf="i < 5" [style]="{ margin:'1px' , height : '80px'}">
+                <div *ngIf="data.life != 0" style="display :inline-flex ; width : 100%">
+                    <div style="flex: 3  ; display: inline-flex; align-items: center">
+                        <img style="max-width:100%;  max-height : 100%" [width]="60 -  (i +1) * 3" [height]="60 - (i +1) * 3 "
+                            [src]="'../../../../../assets/game/common/' + (i + 1) +  '-trophy.png'  " alt="">
+                    </div>
+                    <div style="flex: 5 ; display: flex ; flex-direction: column ; justify-content: space-around ; height: 70px ; padding : 3px ">
+                        <div style="font-size: 16px; ">
+                            {{i+1}}.{{data.UserProfile.nickname}}
+                        </div>
+                        <div style="display :inline-flex ; width : 100%">
+                            <div style="display :inline-flex ; width : 100%; margin-right: 5px;">
+                                <img style="width:20px;  height : 20px ;margin-right:4px" src="../../../../../assets/game/defence/heart50.png"
+                                    alt="">
+                                <span class="rank-info">
+                                    {{data.life}}
+                                </span>
+                            </div>
+                            <div style="display :inline-flex ; width : 100%">
+                                <img style="width:20px ; height : 20px ; margin-right:4px" src="../../../../../assets/game/defence/gold50.png"
+                                    alt="">
+                                <span class="rank-info">
+                                    {{data.deposit}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="data.life == 0" style="font-size:7px;">
+                    클리어한 유저가 없습니다.
+                </div>
+
+
+            </p-card>
+
+        </div>
+
+        <p-card *ngIf="datas.length >=5 " id="common-rankers" [style]="{ margin:'1px' , width : '100%'}">
+            <div style="display:inline-flex ; width : 100%;">
+                <div class="commom-rankers-thumbnail" style="flex : 1 ; display: inline-flex; align-items: center; justify-content: center">
+                    <img style="width:35px ; height : 35px" src="../../../../../assets/game/common/gold-medal.png">
+                </div>
+                <div style="flex : 5 ; display: inline-flex ; width:100% ; flex-wrap: wrap">
+                    <span *ngFor="let data of commonRankers; let i = index" class="common-rankers-row">
+                        <img style="width:20px ; height : 20px" src="../../../../../assets/game/common/gold-medal.png">
+                        <span>
+                            {{i+6}}.{{data.UserProfile.nickname}}
+                        </span>
+                    </span>
+
+                </div>
+
+            </div>
+        </p-card>
+
+        <div class="more-rankers" (click)="totalRankingDisplay = true">
+            전체 랭킹 보기
+
+        </div>
+    </div>
+
+    <p-dialog header="랭킹" [(visible)]="totalRankingDisplay" [modal]="true" [dismissableMask]="true">
+
+        <div class="mobile-rankers">
+            <div class="rankers-paragraph">
+                <div class="left-p" style="flex:1 ; ">
+                    <div style="width  : 100% ; display:inline-flex;     border-bottom: 2px solid #aaa;">
+                        <span class="rank-col col-head">
+                            순위
+                        </span>
+                        <span class="nickname-col">
+                            닉네임
+                        </span>
+                        <span class="life-col">
+                            인내심
+                        </span>
+                        <span class="deposit-col">
+                            골드
+                        </span>
+                    </div>
+                    <div class="left-content-row" *ngFor="let item of originLeftDatas ; let i = index">
+                        <span class="rank-col col-content" [ngClass]="{'trophy': i  < 5 , 'gold' : i >= 5 && i < 25 ,'silver':i >= 25  , 'ceo': i == 0 || i == 5 || i == 25 }">
+                            {{i + 1}}
+                        </span>
+                        <span class="nickname-col">
+                            {{item.UserProfile.nickname}}
+                        </span>
+                        <span class="life-col">
+                            {{item.life}}
+                        </span>
+                        <span class="deposit-col">
+                            {{item.deposit}}
+                        </span>
+
+                    </div>
+                </div>
+                <div style="flex:1">
+                    <div class="right-header" style="width:100%; display:inline-flex;     border-bottom: 2px solid #aaa;">
+                        <span class="rank-col">
+                            순위
+                        </span>
+                        <span class="nickname-col">
+                            닉네임
+                        </span>
+                        <span class="life-col">
+                            인내심
+                        </span>
+                        <span class="deposit-col">
+                            골드
+                        </span>
+                    </div>
+                    <div *ngFor="let item of originRightDatas; let i = index" style="width  : 100%; display:inline-flex">
+                        <span class="rank-col cu" [ngClass]="{'ceo':i == 0}">
+                            {{i+51}}
+                        </span>
+                        <span class="nickname-col">
+                            {{item.UserProfile.nickname}}
+                        </span>
+                        <span class="life-col">
+                            {{item.life}}
+                        </span>
+                        <span class="deposit-col">
+                            {{item.deposit}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p-dialog>
+
+
+
+    <!-- <p-footer>
+        
+    </p-footer> -->
+</p-panel>

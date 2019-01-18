@@ -1,0 +1,442 @@
+<div *ngIf="refugeId">
+    <hr style="    margin:10px;border: 1.5px #eee solid">
+</div>
+<div class="p-grid p-justify-between p-align-center detail-header " [ngClass]="{mobiled : isMobile}">
+    <div class="p-col-9 refuge-name">
+        <div class="name-row">
+            <span [ngStyle]="{'color': getRefugeTitleColor(item)}" *ngIf="itemId !='best'">
+                {{item.name}}
+            </span>
+            <span *ngIf="itemId =='best'">
+                존글
+            </span>
+            <span class="refuge-default-name" *ngIf="itemId !=='best'">
+                도피처
+            </span>
+        </div>
+        <!-- <p-dropdown *ngIf=" itemId !='best' &&  !isMobile" [options]="sortOptions" (onChange)="selectSort($event)"></p-dropdown> -->
+    </div>
+    <div class="p-col-3 tool-btns" style="text-align:right" *ngIf="itemId !='best'">
+        <button *ngIf="refugeId && !isMobile" (click)="goToWrite(item.id)" pButton type="button" label="쓰기" class="ui-button-success write-btn"></button>
+        <i *ngIf="refugeId && isMobile" (click)="goToWrite(item.id)" class="fas fa-edit"></i>
+        <!-- <button *ngIf="isMobile" id="write-btn" (click)="goToWrite(item.id)" pButton type="button" icon="fas fa-edit"
+            class="ui-button-success"></button> -->
+    </div>
+</div>
+
+<div class="quick-writer-wrapper" [ngClass]="{'mobile' : isMobile}">
+    <quick-writer-component (uploadCompleate)="loadData({})" [refuge_id]="itemId" *ngIf="!refugeId && isReady && itemId !='best'"
+        [placeholderCore]=" item.name +'에 대해 하고 싶은 말이 있나요?' "></quick-writer-component>
+</div>
+
+
+
+<!-- <div *ngIf="itemId !='best'" class="middle-text" [ngClass]="{'mobile':isMobile}">
+    <div class="first-text">
+        무엇이든지 상관없어요
+    </div>
+    <div class="second-text" [ngClass]="{'mobile':isMobile}">
+        <span *ngIf="!isMobile">
+            오늘 당신을 짜증나게 만든
+        </span> {{ item.name}}에 대해 자유롭게 소통해보세요
+    </div>
+
+</div> -->
+<div *ngIf="itemId =='best'" class="middle-text" [ngClass]="{'mobile':isMobile}">
+    <div class="second-text" [ngClass]="{'mobile':isMobile}">
+        존중을 많이 받은 글들을 모아놓은 공간입니다.
+    </div>
+
+</div>
+
+
+
+<!-- 공지사항 아티클 -->
+
+<div class="refuge-article-list-wrapper notice-articles" [ngClass]="{'mobile' : isMobile}">
+
+    <p-dataView #pDataView [value]="item.noticeArticles " [paginator]="false" [emptyMessage]="''">
+        <p-header *ngIf="!isMobile">
+            <div class="p-grid" style="padding: 0.071em 0.5em;">
+                <div class="p-col-8">
+                    제목
+                </div>
+                <div class="p-col-2">
+                    작성자
+                </div>
+                <div class="p-col-1">
+                    조회
+                </div>
+                <div class="p-col-1">
+                    존중
+                </div>
+                <!-- <div class="p-col-3">
+                        작성 시간
+                    </div> -->
+            </div>
+        </p-header>
+
+        <ng-template let-article pTemplate="listItem">
+            <div *ngIf=" itemId !='best' && !isPopular   " class="p-grid list-content-wrapper " [ngClass]="{'this-article': articleId == article.id }"
+                (click)="goToArticle(article)">
+                <a [href]="'/refuge-article/'+article.id"></a>
+                <div style="text-align:left" class="list-title" [ngClass]="{'p-col-8' : !isMobile , 'p-col-12': isMobile , 'mobile-title' : isMobile}">
+                    <small> {{findHeader(article.header_id)}} </small>
+                    <span style="margin-right:2.5px; font-weight:bold; color:#2056A6">
+                        [공지사항] {{article.title}}
+                    </span>
+                    <small style="margin-right: 7px;" class="article-comment-count">
+                        ({{article?.RefugeArticleComments? article.RefugeArticleComments.length : 0}})
+                    </small>
+                    <small *ngIf="article.thumbnail">
+                        <i style="margin-top:5px; margin-right:5px" class="fas fa-image has-article-image-icon"></i>
+                    </small>
+                    <small *ngIf="article.youtube">
+                        <i style="margin-top:5px" class="fab fa-youtube has-article-image-icon"></i>
+                    </small>
+                </div>
+                <div class="p-col-2" *ngIf="!isMobile">
+                    {{article?.anonymous ? '익명' : article?.UserProfile?.nickname}}
+                </div>
+                <div class="p-col-1" *ngIf="!isMobile">
+                    <small>
+                        {{article?.hit}}
+                    </small>
+                </div>
+                <div class="p-col-1" *ngIf="!isMobile">
+                    <small>
+                        {{article?.GraphObject?.GraphEdges ? article.GraphObject?.GraphEdges.length : 0 }}
+                    </small>
+                </div>
+                <!-- <div class="p-col-3" *ngIf="!isMobile" >
+                        <small>
+                            {{convertTime(article) }}
+                        </small>
+                    </div> -->
+                <div *ngIf="isMobile" class="mobile-additional-info">
+                    <div class="mobile-nickname">
+                        {{article?.anonymous ? '익명' : article?.UserProfile?.nickname}}
+                    </div>
+                    <div class="mobile-hit-empathy">
+                        <span>
+                            조회 : {{article?.hit}}
+                        </span>
+                        <span>
+                            존중 : {{article?.GraphObject?.GraphEdges ? article.GraphObject?.GraphEdges.length : 0 }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+            <!--  -->
+
+            <div *ngIf=" itemId =='best' || isPopular " class="p-grid list-content-wrapper-best-popular" (click)="goToArticle(article)"
+                [ngClass]="{'this-article': articleId == article.id }">
+                <a [href]="'/refuge-article/'+article.id"></a>
+                <div class="list-title" style="text-align:left" [ngClass]="{'p-col-8' : !isMobile , 'p-col-12': isMobile , 'mobile-title' : isMobile}">
+                    <small *ngIf="!isPopular" style="color : #aaa">
+                        {{article.refuge_name}}
+                    </small>
+                    <span style="margin-right:2.5px;">
+                        {{article.title}}
+                    </span>
+                    <small style="margin-right:7px;" class="article-comment-count">
+                        [{{article.comment_count? article.comment_count : 0}}]
+                    </small>
+                    <small *ngIf="article.thumbnail">
+                        <i style="margin-top:5px" class="fas fa-image has-article-image-icon"></i>
+                    </small>
+                    <small *ngIf="article.youtube">
+                        <i style="margin-top:5px" class="fab fa-youtube has-article-image-icon"></i>
+                    </small>
+                </div>
+                <div class="p-col-2" *ngIf="!isMobile">
+                    {{article.anonymous ? '익명' : article.nickname}}
+                </div>
+
+                <div class="p-col-1" *ngIf="!isMobile">
+                    <small>
+                        {{article.hit}}
+                    </small>
+                </div>
+                <div class="p-col-1" *ngIf="!isMobile">
+                    <small>
+                        {{fixedCount(article.empathy_count ) }}
+                    </small>
+                </div>
+                <!-- <div class="p-col-3" *ngIf="!isMobile">
+                        <small>
+                            {{convertTime(article) }}
+                        </small>
+                    </div> -->
+                <div *ngIf="isMobile" class="mobile-additional-info">
+                    <div class="mobile-nickname">
+                        {{article.anonymous ? '익명' : article.nickname}}
+                    </div>
+                    <div class="mobile-hit-empathy">
+                        <span>
+                            조회 : {{article?.hit}}
+                        </span>
+                        <span>
+                            존중 : {{fixedCount(article.empathy_count )}}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </ng-template>
+    </p-dataView>
+
+</div>
+
+
+
+<!-- 실질적 아티클   -->
+
+<div class="refuge-article-list-wrapper user-articles" [ngClass]="{'mobile' : isMobile}">
+
+    <p-dataView #pDataView [loading]="!isReady" [value]="itemId =='best' ? bests : (isPopular ? populars : item.RefugeArticles)   "
+        [paginator]="false" [rows]="articleRow" [totalRecords]="totalRecords" [lazy]="true" (onLazyLoad)="loadData($event)"
+        (onPage)="onPage($event)">
+        <!-- <p-header *ngIf="!isMobile">
+            <div class="p-grid" style="padding: 0.071em 0.5em;">
+                <div class="p-col-8">
+                    제목
+                </div>
+                <div class="p-col-2">
+                    작성자
+                </div>
+                <div class="p-col-1">
+                    조회
+                </div>
+                <div class="p-col-1">
+                    존중
+                </div>
+                
+            </div>
+        </p-header> -->
+
+        <ng-template let-article pTemplate="listItem">
+            <div *ngIf=" itemId !='best' && !isPopular   " class="p-grid list-content-wrapper " [ngClass]="{'this-article': articleId == article.id }"
+                (click)="goToArticle(article)">
+                <a [href]="'/refuge-article/'+article.id"></a>
+                <div style="text-align:left" class="list-title" [ngClass]="{'p-col-8' : !isMobile , 'p-col-12': isMobile , 'mobile-title' : isMobile}">
+                    <small> {{findHeader(article.header_id)}} </small>
+                    <span style="margin-right:2.5px;">
+                        {{article.title}}
+                    </span>
+                    <small style="margin-right: 7px;" class="article-comment-count">
+                        ({{article?.RefugeArticleComments? article.RefugeArticleComments.length : 0}})
+                    </small>
+                    <small *ngIf="article.thumbnail">
+                        <i style="margin-top:5px; margin-right:5px" class="fas fa-image has-article-image-icon"></i>
+                    </small>
+                    <small *ngIf="article.youtube">
+                        <i style="margin-top:5px" class="fab fa-youtube has-article-image-icon"></i>
+                    </small>
+                </div>
+                <div class="p-col-2" *ngIf="!isMobile">
+                    {{article?.anonymous ? '익명' : article?.UserProfile?.nickname}}
+                </div>
+                <div class="p-col-1" *ngIf="!isMobile">
+                    <small>
+                        {{article?.hit}}
+                    </small>
+                </div>
+                <div class="p-col-1" *ngIf="!isMobile">
+                    <small>
+                        {{article?.GraphObject?.GraphEdges ? article.GraphObject?.GraphEdges.length : 0 }}
+                    </small>
+                </div>
+                <!-- <div class="p-col-3" *ngIf="!isMobile" >
+                    <small>
+                        {{convertTime(article) }}
+                    </small>
+                </div> -->
+                <div *ngIf="isMobile" class="mobile-additional-info">
+                    <div class="mobile-nickname">
+                        {{article?.anonymous ? '익명' : article?.UserProfile?.nickname}}
+                    </div>
+                    <div class="mobile-hit-empathy">
+                        <span>
+                            조회 : {{article?.hit}}
+                        </span>
+                        <span>
+                            존중 : {{article?.GraphObject?.GraphEdges ? article.GraphObject?.GraphEdges.length : 0 }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+            <!--  -->
+
+            <div *ngIf=" itemId =='best' || isPopular " class="p-grid list-content-wrapper-best-popular" (click)="goToArticle(article)"
+                [ngClass]="{'this-article': articleId == article.id }">
+                <a [href]="'/refuge-article/'+article.id"></a>
+                <div class="list-title" style="text-align:left" [ngClass]="{'p-col-8' : !isMobile , 'p-col-12': isMobile , 'mobile-title' : isMobile}">
+                    <small *ngIf="!isPopular" style="color : #aaa">
+                        {{article.refuge_name}}
+                    </small>
+                    <span style="margin-right:2.5px;">
+                        {{article.title}}
+                    </span>
+                    <small style="margin-right:7px;" class="article-comment-count">
+                        [{{article.comment_count? article.comment_count : 0}}]
+                    </small>
+                    <small *ngIf="article.thumbnail">
+                        <i style="margin-top:5px" class="fas fa-image has-article-image-icon"></i>
+                    </small>
+                    <small *ngIf="article.youtube">
+                        <i style="margin-top:5px" class="fab fa-youtube has-article-image-icon"></i>
+                    </small>
+                </div>
+                <div class="p-col-2" *ngIf="!isMobile">
+                    {{article.anonymous ? '익명' : article.nickname}}
+                </div>
+
+                <div class="p-col-1" *ngIf="!isMobile">
+                    <small>
+                        {{article.hit}}
+                    </small>
+                </div>
+                <div class="p-col-1" *ngIf="!isMobile">
+                    <small>
+                        {{fixedCount(article.empathy_count ) }}
+                    </small>
+                </div>
+                <!-- <div class="p-col-3" *ngIf="!isMobile">
+                    <small>
+                        {{convertTime(article) }}
+                    </small>
+                </div> -->
+                <div *ngIf="isMobile" class="mobile-additional-info">
+                    <div class="mobile-nickname">
+                        {{article.anonymous ? '익명' : article.nickname}}
+                    </div>
+                    <div class="mobile-hit-empathy">
+                        <span>
+                            조회 : {{article?.hit}}
+                        </span>
+                        <span>
+                            존중 : {{fixedCount(article.empathy_count )}}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </ng-template>
+        <!-- <p-footer class="p-grid p-justify-center p-align-center">
+            <p-dropdown [options]="[{label:'제목',value:'title'},{label:'작성자', value:'nickname'}]" [(ngModel)]="searchTarget"></p-dropdown>
+            <div class="ui-inputgroup">
+                <input type="text" pInputText placeholder="검색" (keyup)="searchArticle()">
+                <button (click)="searchArticle()" pButton type="button" icon="fa fa-search" class="ui-button-warn"></button>
+            </div>
+        </p-footer> -->
+    </p-dataView>
+
+
+
+    <p-paginator #pPaginator [rows]="articleRow" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+
+
+    <!-- <div *ngIf="isMobile" class="search-results" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="1000"
+        (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)" [infiniteScrollUpDistance]="0.1">
+        <div class="mobild-article-row  p-grid p-justify-between" *ngFor="let article of infiniteList ; " (click)="goToArticle(article)">
+            <div class="p-col-12 article-top">
+                <div class="author" *ngIf="itemId !='best'">
+                    {{article.UserProfile?.nickname}}
+                </div>
+                <div class="author" *ngIf="itemId =='best'">
+                    {{article.nickname}}
+                </div>
+                <div class="created-at">
+                    {{convertTime(article) }}
+                </div>
+            </div>
+            <div *ngIf="article.thumbnail" class="p-col-12 article-img">
+                <img [src]="article.thumbnail" alt="" style="max-height:200px;">
+            </div>
+            <div class="p-col-12 article-body ">
+                <div class="title">
+                    <span>
+                        {{article.title}}
+                    </span>
+
+                </div>
+                <div class="hit-empathy">
+                    <div class="hit">
+                        <span>
+                            조회
+                        </span>
+                        <span>
+                            {{article.hit}}회
+                        </span>
+                    </div>
+                    <div class="empathy">
+                        <span>
+                            존중
+                        </span>
+                        <span *ngIf="itemId !='best'">
+                            {{article.GraphObject?.GraphEdges ? article.GraphObject?.GraphEdges.length : 0 }}개
+                        </span>
+                        <span *ngIf="itemId =='best'">
+                            {{fixedCount(article.empathy_count ) }}개
+                        </span>
+
+                    </div>
+                    <div class="comment">
+                        <span>
+                            댓글
+                        </span>
+                        <span>
+                            <span *ngIf="itemId !='best'">
+                                {{article.RefugeArticleComments? article.RefugeArticleComments.length : 0}}개
+                            </span>
+                            <span *ngIf="itemId =='best'">
+                                {{article.comment_count? article.comment_count : 0}}개
+                            </span>
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <p-progressSpinner *ngIf="progressDisplay" [style]="{'width':'30px'}"></p-progressSpinner>
+    </div> -->
+
+
+
+</div>
+
+<div class="tool-btns" style="width:100%;     padding: .5em; text-align:right" *ngIf="itemId !='best'">
+    <button (click)="goToWrite(item.id)" pButton type="button" label="쓰기" class="write-btn ui-button bottom-writer-btn"></button>
+    <!-- <i *ngIf="!refugeId && isMobile" (click)="goToWrite(item.id)" class="fas fa-edit"></i> -->
+</div>
+
+
+<div style="padding: 15px; margin-top:45px;">
+    <app-refuge-list [customText]="'이런 도피처는 어떠세요?'" [isSmallFont]="true"></app-refuge-list>
+</div>

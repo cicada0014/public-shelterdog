@@ -1,0 +1,101 @@
+
+
+
+
+:host{
+
+    .refuge-list-wrapper{
+        padding: 5px;
+        .refuge-list-box{
+            padding: 15px;
+            .category-title{
+                font-size :0.83rem;
+                margin-bottom: 8px;
+                font-weight: bold;
+            }
+            .refuge-list-item{
+                font-size: 0.8rem;
+                color: #999;
+                padding: 0px 0px 5px 0px   ;
+                cursor: pointer;
+                &:hover{
+                    font-weight: 600;
+                    text-decoration: underline
+                }
+            }
+        }
+
+    }
+
+    .ui-panel-title{
+        font-size:16px;
+        display:inline-block;
+        &.isSmallFont{
+            font-size: 13px !important;
+        }
+
+    }
+    .simple-list{
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        .simple-list-item{
+            display: table-cell;
+            float:left; 
+            width: 20%;
+            &.mobile{
+                width: 33.33333% ;    
+                font-size: 14px ;
+            }
+            &.small-font{
+                font-size:13px !important;
+                // width: 25% !important ;    
+            }
+            padding: 10px 15px;
+            font-size: 15px;
+            a{
+                cursor: pointer;
+                &:hover{
+                    font-weight: bold;
+                }
+            }
+        }
+
+    }
+    .request-area{
+        
+        margin-top: 10px;
+        padding:10px 15px;
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        border-top: 1px dashed #ddd;
+
+        &.small-font{
+            .cta{
+                font-size: 11px !important;
+            }
+            a{
+                font-size: 11px !important;
+            }   
+        }
+
+        .cta-wrapper{
+            &:hover{
+                text-decoration: underline;
+            }
+            .cta{
+                cursor: pointer;
+                font-size: 12px;
+                color : #007ad9;
+            }
+            a{
+                margin-left: 15px;
+                font-size: 12px;
+                color: #000 !important;
+            }
+        }
+    }
+
+
+}

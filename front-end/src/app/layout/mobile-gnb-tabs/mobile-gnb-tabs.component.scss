@@ -1,0 +1,70 @@
+
+@import '../../../global-theme.scss';
+
+.mobile-gnb-tabs{
+    transition: .5s;
+    top:43px;
+    border-bottom: 1px solid #aaa;
+    z-index: 309;
+    position: fixed;
+    background: #fff;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    padding-right: 10px;
+    padding-left: 10px;
+
+    .gnb-tab-item{
+        flex:1 !important;
+        width: 20%;
+        .tab-text{
+            padding:5px;
+            word-wrap: break-word;
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            display: inline-flex;
+            justify-content: center;
+        }
+
+        &.activated{
+            color:  $global-theme-color
+        }
+        // &:active{
+            
+        // }
+    }
+}
+        #gnb-position-guide{
+            margin-right:5px;
+            margin-left: 5px;
+            position: fixed;
+            top:78px;
+            width: 20%;
+            transition: .4s;
+            // transition-property: 
+            background: $global-theme-color;
+            height : 3px;
+            z-index: 309;
+            &.not-ready{
+                display:none;
+            }
+        }
+        #gnb-position-cunnectBar{
+            // margin-right:5px;
+            // margin-left: 5px;
+            position: fixed;
+            top:77px;
+            width: 20%;
+            // transition: .4s;
+            // transition-property: 
+            background: $global-bg-color;
+            height : 5px;
+            z-index: 310;
+            &.not-ready{
+                display:none;
+            }
+        }

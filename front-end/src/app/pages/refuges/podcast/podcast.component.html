@@ -1,0 +1,42 @@
+<p-panel>
+
+    <p-header>
+        <div style="display:inline-flex; width:100%; justify-content:space-between">
+            <span class="ui-panel-title" style="font-size:16px;display:inline-block">ᄋᄋᄋ을 싫어하겠습니다</span>
+            <span style="    margin-top: 2px;color: #fff;cursor:pointer" (click)="goPodcast()">더 보기</span>
+        </div>
+    </p-header>
+
+
+    <div *ngIf="item" class="p-grid">
+        <div [ngClass]="{'p-col-6':!isMobile , 'p-col-12':isMobile}" style="text-align:center">
+            <div [innerHTML]="item.link">
+            </div>
+        </div>
+        <div [ngClass]="{'p-col-6':!isMobile , 'p-col-12':isMobile ,'mobile':isMobile }" class="podcast-info">
+            <div class="info">
+                "싫어하는 것을
+                <br>
+                자유롭게 이야기하는 라디오"
+            </div>
+            <hr style="margin-top:15px;">
+            <div class="podcast-title" [ngClass]="{'mobile':isMobile}">
+                <span class="name-title">
+                    {{item.title}}
+                </span>
+                <span class="podcast-created-at">
+                    {{convertTime( item.created_at)}}
+                </span>
+
+            </div>
+            <div class="podcast-description" style="font-size:16px; margin-top:15px;">
+                {{item.description}}
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+</p-panel>

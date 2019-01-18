@@ -1,0 +1,9 @@
+{
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "../test"
+    },
+    "files": [
+        "../src/test/app.test.ts"
+    ]
+}

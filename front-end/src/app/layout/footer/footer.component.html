@@ -1,0 +1,74 @@
+<div *ngIf="isMobile" style=" width: 100%; display: inline-flex; justify-content: center; align-items: center">
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <!-- 하단 모바일 큰 배너 -->
+    <ins class="adsbygoogle" style="display:inline-block;width:320px;height:100px" data-ad-client="ca-pub-2127030706496959"
+        data-ad-slot="8584735713"></ins>
+    <!-- <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script> -->
+</div>
+
+
+
+<div class="footer-wrapper">
+    <div class="footer-items">
+        <div class="footer-item" (click)="openModal('privateSecurityStrategy')">
+            개인정보보호 조항
+        </div>
+        <div class="footer-item" (click)="openModal('useTerm')">
+            이용약관
+        </div>
+        <div class="footer-item" (click)="openModal('openSourceLisence')  ">
+            오픈소스 라이선스
+        </div>
+    </div>
+    <div class="site-info">
+        <div class="copyright-text">
+            Copyright <i class="far fa-copyright fa-xs"></i> Shelter Dog All rights reserved.
+        </div>
+        <div class="address-text">
+            Contact : shelter0helper@gmail.com
+        </div>
+        <div class="address-text">
+            주소 : 경기도 성남시 분당구 대왕판교 645번길 12
+        </div>
+    </div>
+
+
+    <div>
+        <p-dialog [positionTop]="0" [positionLeft]="0" [draggable]="true" [modal]="true" [responsive]="true" header="개인정보처리방침"
+            [(visible)]="privateSecurityStrategy">
+            <div style=" word-wrap: break-word;">
+                <div style="background :white ; width:100%  ; " markdown [data]="privateContents"></div>
+            </div>
+        </p-dialog>
+
+
+        <p-dialog [positionTop]="0" [positionLeft]="0" [draggable]="true" [modal]="true" [responsive]="true" header="이용약관"
+            [(visible)]="useTerm">
+            <div style=" word-wrap: break-word;">
+                <div style="background :white ; width:100%  ; " markdown [data]="termContents"></div>
+            </div>
+        </p-dialog>
+        <p-dialog [positionTop]="0" [positionLeft]="0" [draggable]="true" [modal]="true" [responsive]="true" header="오픈소스 라이선스"
+            [(visible)]="openSourceLisence">
+            <div style=" word-wrap: break-word; width:100%;">
+                <ul>
+                    <li *ngFor="let opl of openSourceLibs">
+                        <div>
+                            {{opl.name}}
+                        </div>
+                        <div>
+                            {{opl.link}} | {{opl.type}}
+                        </div>
+                    </li>
+                </ul>
+
+
+
+            </div>
+        </p-dialog>
+
+    </div>
+
+</div>
