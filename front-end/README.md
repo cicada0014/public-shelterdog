@@ -1,27 +1,10 @@
-# Shelter
+# Shelter Dog
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
+이 프로젝트는 싫어하는 것을 소통하는 커뮤니티인 Shelter dog의 소스코드를 올린 것 입니다.
+보안과 민감한 사항을 제외하고는 전부 파일로 올려 공개합니다! 
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## 전반적인 구조를 확인하시는데만 이용하세요~
+일부 파일이 빠졌기 때문에 다운로드하셔도 정삭 작동을 하지 않습니다.
+https://shelterdog.net 에 가시면 서비스된 페이지를 보실 수 있습니다. 
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
